@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 jobs:
   Builds:
-    runs-on: ubuntu-22.94
+    runs-on: ubuntu-22.04
     steps:
       - name: Listar directorios
         run: ls -l
