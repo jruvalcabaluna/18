@@ -18,7 +18,7 @@ jobs:
           python-version: 3.11
           
       - name: Install pre-commit-vauxoo
-        run: python3 -m pip install –force-reinstall -U pre-commit-vauxoo
+        run: pip install pre-commit-vauxoo
 
       - name: Run pre-commit-vauxoo checks
         run: pre-commit-vauxoo -t all # Or specify your desired pre-commit-vauxoo arguments
