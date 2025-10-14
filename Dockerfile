@@ -1,44 +1,39 @@
-# Use official Python image as a base
-FROM python:3.9-slim
-# Set environment variables
-ENV ODOO_HOME=/opt/odoo
-ENV ODOO_USER=odoo
 
-# Update apt-get and install dependencies
+
+# Base image for Odoo (e.g., official Odoo image or a custom one)
+FROM odoo:17.0
+
+# Install necessary dependencies for the runner
 RUN apt-get update && apt-get install -y \
-build-essential \
-python3 \
-python3-pip \
-python3-dev \
-libldap2-dev \
-libsasl2-dev \
-python3-setuptools \
-libjpeg-dev \
-nodejs \
-npm \
-git \
-&& apt-get clean
+    curl \
+    git \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
 
-# Clone Odoo from GitHub (version 15 in this case)
-RUN git clone --branch 17.0 https://github.com/odoo/odoo.git $ODOO_HOME
+# Create a user for the runner (optional but recommended for security)
+RUN useradd -m github-runner && usermod -aG sudo github-runner
 
-# Install Python dependencies
-RUN pip3 install -r /opt/odoo/requirements.txt
+# Download and extract the GitHub Actions runner application
+ARG RUNNER_VERSION="2.316.0" # Check for the latest version on GitHub Actions docs
+RUN curl -o actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -L \
+    https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
+    tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -C /home/github-runner && \
+    rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 
-# Add the Odoo configuration file
-COPY ./odoo.conf /etc/odoo.conf
+# Set permissions
+RUN chown -R github-runner:github-runner /home/github-runner
 
-# Set file permissions
-RUN useradd -m -d /opt/odoo -s /bin/bash odoo
-RUN chown -R odoo:odoo /opt/odoo
-RUN chown -R odoo:odoo /etc/odoo.conf
-#RUN chown $ODOO_USER:$ODOO_USER /etc/odoo.conf
+# Switch to the runner user for security
+USER github-runner
 
-# Expose Odoo port
+# Set the working directory for the runner
+WORKDIR /home/github-runner
+
+# Entrypoint script to configure and run the runner
+COPY entrypoint.sh /home/github-runner/entrypoint.sh
+RUN chmod +x /home/github-runner/entrypoint.sh
+
+# Expose Odoo port (if needed)
 EXPOSE 8069
 
-# Set the working directory
-WORKDIR $ODOO_HOME
-
-# Define the entrypoint to run Odoo
-CMD ["python3", "odoo-bin", "--config", "/etc/odoo.conf"]
+ENTRYPOINT ["/home/github-runner/entrypoint.sh"]
