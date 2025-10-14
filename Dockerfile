@@ -8,7 +8,7 @@ ENV ODOO_USER=odoo
 RUN apt-get update && apt-get install -y \
 build-essential \
 python3 \
-python3-pip \ 
+python3-pip \
 python3-dev \
 libldap2-dev \
 libsasl2-dev \
