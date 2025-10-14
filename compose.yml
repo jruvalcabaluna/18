@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  web:
+    image: odoo:17.0 # Configure docker image version
+    user: root
+    depends_on:
+      - db
+    tty: true
+    ports:
+      - "10017:8069"
+    volumes: # Configure Volumes
+      - ./logs:/etc/odoo-logs/
+      - ./config:/etc/odoo/ # Odoo Config Path
+      - ./odoo_github/addon_custom:/mnt/extra-addons
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=strongpassword # Should be the same as PG DB
+  db:
+    image: postgres:16
+    environment: # Configure DB
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=strongpassword
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+volumes:
+  odoo-web-data:
+  odoo-db-data:
