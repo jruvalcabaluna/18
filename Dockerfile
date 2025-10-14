@@ -1,0 +1,56 @@
+# Use official Python image as a base
+FROM python:3.9-slim
+# Set environment variables
+ENV ODOO_HOME=/opt/odoo
+ENV ODOO_USER=odoo
+
+# Update apt-get and install dependencies
+RUN apt-get update && apt-get install -y \
+build-essential \
+libssl-dev \
+libpq-dev \
+libxml2-dev \
+libxslt1-dev \
+libsasl2-dev \
+libldap2-dev \
+zlib1g-dev \
+libjpeg-dev \
+liblcms2-dev \
+libblas-dev \
+libatlas-base-dev \
+python-dev \
+python3-dev \
+python3-pip \
+git \
+&& apt-get clean
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir \
+setuptools \
+psycopg2 \
+pillow \
+lxml \
+werkzeug \
+passlib \
+Jinja2 \
+pypdf2 \
+reportlab \
+python-dateutil
+
+# Clone Odoo from GitHub (version 15 in this case)
+RUN git clone --branch 17.0 https://github.com/odoo/odoo.git $ODOO_HOME
+
+# Add the Odoo configuration file
+COPY ./odoo.conf /etc/odoo.conf
+
+# Set file permissions
+RUN chown $ODOO_USER:$ODOO_USER /etc/odoo.conf
+
+# Expose Odoo port
+EXPOSE 8069
+
+# Set the working directory
+WORKDIR $ODOO_HOME
+
+# Define the entrypoint to run Odoo
+CMD ["python3", "odoo-bin", "--config", "/etc/odoo.conf"]
