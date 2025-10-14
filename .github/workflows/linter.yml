@@ -30,7 +30,7 @@ jobs:
         run: cat /etc/os-release
 
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
 
   deploy:
     needs: build-and-push # Este job depende del anterior
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Desplegar en Azure App Service
         uses: azure/webapps-deploy@v2
