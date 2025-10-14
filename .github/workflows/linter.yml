@@ -27,8 +27,9 @@ jobs:
         run: ls -l
 
       - name: Version SO
-        run: cat /etc/os-releasebuild-and-push:
-        
+        run: cat /etc/os-releasebuild-and-push
+
+  build-and-push:
     runs-on: self-hosted
     steps:
       - name: Checkout del código
@@ -58,5 +59,3 @@ jobs:
           slot-name: production # O el nombre de tu slot de despliegue
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: tu-usuario/tu-imagen:latest
-
-  
