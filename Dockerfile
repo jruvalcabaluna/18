@@ -29,7 +29,10 @@ RUN pip3 install -r /opt/odoo/requirements.txt
 COPY ./odoo.conf /etc/odoo.conf
 
 # Set file permissions
-RUN chown $ODOO_USER:$ODOO_USER /etc/odoo.conf
+RUN useradd -m -d /opt/odoo -s /bin/bash odoo
+RUN chown -R odoo:odoo /opt/odoo
+RUN chown -R odoo:odoo /etc/odoo.conf
+#RUN chown $ODOO_USER:$ODOO_USER /etc/odoo.conf
 
 # Expose Odoo port
 EXPOSE 8069
