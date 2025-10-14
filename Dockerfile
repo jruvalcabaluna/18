@@ -7,20 +7,15 @@ ENV ODOO_USER=odoo
 # Update apt-get and install dependencies
 RUN apt-get update && apt-get install -y \
 build-essential \
-libssl-dev \
-libpq-dev \
-libxml2-dev \
-libxslt1-dev \
-libsasl2-dev \
-libldap2-dev \
-zlib1g-dev \
-libjpeg-dev \
-liblcms2-dev \
-libblas-dev \
-libatlas-base-dev \
-python-dev \
+python3 \
+python3-pip \ 
 python3-dev \
-python3-pip \
+libldap2-dev \
+libsasl2-dev \
+python3-setuptools \
+libjpeg-dev \
+nodejs \
+npm \
 git \
 && apt-get clean
 
