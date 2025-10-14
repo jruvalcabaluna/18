@@ -30,7 +30,7 @@ jobs:
         run: cat /etc/os-release
 
   build-and-push:
-    runs-on: self-hosted
+    runs-on: ubuntu-lastest
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
