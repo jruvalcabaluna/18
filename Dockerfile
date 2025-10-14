@@ -19,21 +19,11 @@ npm \
 git \
 && apt-get clean
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir \
-setuptools \
-psycopg2 \
-pillow \
-lxml \
-werkzeug \
-passlib \
-Jinja2 \
-pypdf2 \
-reportlab \
-python-dateutil
-
 # Clone Odoo from GitHub (version 15 in this case)
 RUN git clone --branch 17.0 https://github.com/odoo/odoo.git $ODOO_HOME
+
+# Install Python dependencies
+RUN pip3 install -r /opt/odoo/requirements.txt
 
 # Add the Odoo configuration file
 COPY ./odoo.conf /etc/odoo.conf
