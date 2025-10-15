@@ -36,4 +36,4 @@ RUN chmod +x /home/nubuserp/entrypoint.sh
 # Expose Odoo port (if needed)
 EXPOSE 8069
 
-ENTRYPOINT ["/home/nubuserp/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
