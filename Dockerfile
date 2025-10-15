@@ -21,19 +21,19 @@ RUN curl -o actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -L \
     rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 
 # Set permissions
-RUN chown -R github-runner:github-runner /home/github-runner
+RUN chown -R github-runner:github-runner /home/nubuserp
 
 # Switch to the runner user for security
 USER github-runner
 
 # Set the working directory for the runner
-WORKDIR /home/github-runner
+WORKDIR /home/nubuserp
 
 # Entrypoint script to configure and run the runner
-COPY entrypoint.sh /home/github-runner/entrypoint.sh
-RUN chmod +x /home/github-runner/entrypoint.sh
+COPY entrypoint.sh /home/nubuserp/entrypoint.sh
+RUN chmod +x /home/nubuserp/entrypoint.sh
 
 # Expose Odoo port (if needed)
 EXPOSE 8069
 
-ENTRYPOINT ["/home/github-runner/entrypoint.sh"]
+ENTRYPOINT ["/home/nubuserp/entrypoint.sh"]
