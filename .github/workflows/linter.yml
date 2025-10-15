@@ -48,14 +48,14 @@ jobs:
           push: true
           tags: nubuserp/odoo:latest # Reemplaza con tus datos
 
-  deploy:
-    needs: build-and-push # Este job depende del anterior
-    runs-on: ubuntu-lastest
-    steps:
-      - name: Desplegar en Azure App Service
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: tu-nombre-de-app-azure # Reemplaza con el nombre de tu App Service
-          slot-name: production # O el nombre de tu slot de despliegue
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: tu-usuario/tu-imagen:latest
+  #deploy:
+  #  needs: build-and-push # Este job depende del anterior
+  #  runs-on: ubuntu-lastest
+  #  steps:
+  #    - name: Desplegar en Azure App Service
+  #      uses: azure/webapps-deploy@v2
+  #      with:
+  #        app-name: tu-nombre-de-app-azure # Reemplaza con el nombre de tu App Service
+  #        slot-name: production # O el nombre de tu slot de despliegue
+  #        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+  #        images: tu-usuario/tu-imagen:latest
