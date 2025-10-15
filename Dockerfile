@@ -17,7 +17,7 @@ RUN useradd -m github-runner && usermod -aG sudo github-runner
 ARG RUNNER_VERSION="2.316.0" # Check for the latest version on GitHub Actions docs
 RUN curl -o actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -L \
     https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -C /home/github-runner && \
+    tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz -C /home/nubuserp && \
     rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 
 # Set permissions
