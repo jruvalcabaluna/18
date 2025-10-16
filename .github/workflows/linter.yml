@@ -67,10 +67,22 @@ jobs:
       - name: Start Odoo Instance
         run: docker run -d -p 8069:8069 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
 
-      - name: Restore Odoo database
-        env:
-          ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
-        run: ./restore_odoo.sh "mtn" "odoo.zip"
+      - name: Unzip Database
+        #env:
+        #  ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
+        run: unzip ./odoo.zip -d /tmp/odoo_restore
+
+      - name: Change to postgres user
+        run: su postgres
+
+      - name: Create black database
+        run: createdb -O odoo odoo
+
+      - name: Restore DB
+        run: psql -d odoo -f /tmp/odoo_restore/dump.sql
+
+      - name: Exit
+        run: exit
               # Example for using pg_restore for a custom pg_dump:
               # pg_restore -d ${{ github.event.inputs.db_name }} -U odoo -h <DB_HOST> -p 5432 ${{ github.event.inputs.backup_file_path }}
               # Example using click-odoo-restoredb (if installed):
