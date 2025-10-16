@@ -11,7 +11,7 @@ ENV LANG C.UTF-8
 RUN apt-get update && apt-get install -y \
     git build-essential libpq-dev libxml2-dev libxslt1-dev \
     libldap2-dev libsasl2-dev libjpeg-dev zlib1g-dev \
-    libjpeg-dev libpng-dev liblcms2-dev libblas-dev libatlas-base-dev \
+    libjpeg-dev libpng-dev liblcms2-dev libblas-dev \
     libffi-dev libssl-dev libevent-dev \
     && apt-get clean
 
