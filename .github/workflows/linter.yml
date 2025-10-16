@@ -73,7 +73,7 @@ jobs:
         run: unzip -o ./odoo.zip -d /tmp/odoo_restore
         
       - name: Add user to sudoers
-        run: useradd -m odoo && echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
+        run: echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
         
       - name: Change to postgres user
         run: sudo su postgres
