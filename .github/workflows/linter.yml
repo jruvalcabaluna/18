@@ -47,7 +47,16 @@ jobs:
           context: .
           push: true
           tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
-          
+
+      - name: Stop all docker instances
+        run: docker stop $(docker ps -aq)
+
+      - name: Remove all containers
+        run: docker rm $(docker ps -a -q)
+
+      - name: Remove all images
+        run: docker rmi $(docker images -a -q)
+        
       - name: Pull Docker Image
         run: docker pull jruvalcabaluna/odoo:latest
 
