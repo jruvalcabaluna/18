@@ -16,8 +16,8 @@ services:
       - "8069:8069" # Odoo web interface
     environment:
       - HOST=localhost
-      - USER=odoo
-      - PASSWORD=odoo
+      - USER=nubuserp
+      - PASSWORD=Nubus3rp#001$
     depends_on:
       - db
     volumes:
