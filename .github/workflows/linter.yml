@@ -65,7 +65,7 @@ jobs:
         run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
 
       - name: Start Odoo Instance
-        run: docker run -p 8069:8069 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
+        run: docker run -d -p 8069:8069 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
 
       - name: Restore Odoo database
         env:
