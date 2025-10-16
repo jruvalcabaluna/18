@@ -77,15 +77,9 @@ jobs:
         
       - name: Change to postgres user
         run: sudo su postgres
-
-      - name: Create black database
-        run: createdb -O odoo odoo
-
-      - name: Restore DB
-        run: psql -d odoo -f /tmp/odoo_restore/dump.sql
-
-      - name: Exit
-        run: exit
+             createdb -O odoo odoo
+             psql -d odoo -f /tmp/odoo_restore/dump.sql
+             exit
               # Example for using pg_restore for a custom pg_dump:
               # pg_restore -d ${{ github.event.inputs.db_name }} -U odoo -h <DB_HOST> -p 5432 ${{ github.event.inputs.backup_file_path }}
               # Example using click-odoo-restoredb (if installed):
