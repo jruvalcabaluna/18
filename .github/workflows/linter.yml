@@ -52,11 +52,11 @@ jobs:
       #- name: Stop all docker instances
       #  run: docker stop $(docker ps -aq)
 
-      - name: Remove all containers
-        run: docker rm $(docker ps -a -q)
+      #- name: Remove all containers
+      #  run: docker rm $(docker ps -a -q)
 
-      - name: Remove all images
-        run: docker rmi $(docker images -a -q) --force
+      #- name: Remove all images
+      #  run: docker rmi $(docker images -a -q) --force
         
       - name: Pull Docker Image
         run: docker pull jruvalcabaluna/odoo:latest
