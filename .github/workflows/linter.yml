@@ -74,13 +74,9 @@ jobs:
         
       #- name: Add user to sudoers
       #  run: echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
-        
-      - name: Change to postgres user
-        run: |
-              sudo su postgres
-              createdb -O odoo odoo
-              psql -d odoo -f /tmp/odoo_restore/dump.sql
-              exit
+      - name: Restore database
+        run: pg_restore -U odoo -d odoo /tmp/odoo_restore/dump.sql
+             
               # Example for using pg_restore for a custom pg_dump:
               # pg_restore -d ${{ github.event.inputs.db_name }} -U odoo -h <DB_HOST> -p 5432 ${{ github.event.inputs.backup_file_path }}
               # Example using click-odoo-restoredb (if installed):
