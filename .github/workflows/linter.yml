@@ -47,6 +47,15 @@ jobs:
           context: .
           push: true
           tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
+          
+      - name: Pull Docker Image
+        run: docker pull jruvalcabaluna/odoo:latest
+
+      - name: Start Postgresql
+        run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
+
+      - name: Start Odoo Instance
+        run: docker run -p 8069:8069 --name odoo --link db:db -t odoo
 
   #deploy:
   #  needs: build-and-push # Este job depende del anterior
