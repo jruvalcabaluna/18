@@ -70,7 +70,7 @@ jobs:
       - name: Unzip Database
         #env:
         #  ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
-        run: unzip ./odoo.zip -o -d /tmp/odoo_restore
+        run: unzip -o ./odoo.zip -d /tmp/odoo_restore
         
       - name: Add user to sudoers
         run: useradd -m odoo && echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
