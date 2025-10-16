@@ -55,7 +55,7 @@ jobs:
         run: docker rm $(docker ps -a -q)
 
       - name: Remove all images
-        run: docker rmi $(docker images -a -q)
+        run: docker rmi $(docker images -a -q) --force
         
       - name: Pull Docker Image
         run: docker pull jruvalcabaluna/odoo:latest
