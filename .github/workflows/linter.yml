@@ -82,7 +82,7 @@ jobs:
         run: docker-compose up -d --build
 
       - name: Wait for Odoo to start (optional)
-        run: sleep 30 # Adjust as needed for Odoo to fully initialize
+        run: sleep 60 # Adjust as needed for Odoo to fully initialize
 
       - name: Run Odoo Tests (optional)
         # Example: Replace with your actual Odoo test command
