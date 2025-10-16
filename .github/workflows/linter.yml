@@ -73,7 +73,7 @@ jobs:
         run: unzip ./odoo.zip -d /tmp/odoo_restore
 
       - name: Change to postgres user
-        run: su postgres
+        run: sudo su postgres
 
       - name: Create black database
         run: createdb -O odoo odoo
