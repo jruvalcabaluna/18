@@ -1,12 +1,12 @@
 #name: Pylint Odoo
 
-#on:
-#  push:
-#      branches:
-#        - main
-#        - "18.0"
-#  workflow_dispatch:
-#jobs:
+on:
+  push:
+      branches:
+        - main
+        - "18"
+  workflow_dispatch:
+jobs:
 #  Builds:
 #    runs-on: self-hosted
 #    steps:
@@ -29,24 +29,24 @@
 #      - name: Version SO
 #        run: cat /etc/os-releasebuild-and-push
 
-#  build-and-push:
-#    runs-on: self-hosted
-#    steps:
-#      - name: Checkout del código
-#        uses: actions/checkout@v4
+  build-and-push:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
 
-#      - name: Iniciar sesión en Docker Hub
-#        uses: docker/login-action@v3
-#        with:
-#          username: "jruvalcaba@nubuserp.com"
-#          password: "dckr_pat_UG69kz0EwfryzQjkltGpOfGC3fQ"
+      - name: Iniciar sesión en Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: "jruvalcaba@nubuserp.com"
+          password: "dckr_pat_UG69kz0EwfryzQjkltGpOfGC3fQ"
 
-#      - name: Construir y empujar la imagen
-#        uses: docker/build-push-action@v5
-#        with:
-#          context: .
-#          push: true
-#          tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
+      - name: Construir y empujar la imagen
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
 
   #deploy:
   #  needs: build-and-push # Este job depende del anterior
@@ -61,33 +61,33 @@
   #        images: tu-usuario/tu-imagen:latest
 
 # .github/workflows/odoo-ci.yml
-name: Odoo CI
+#name: Odoo CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+#on:
+#  push:
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
 
-jobs:
-  build-and-run-odoo:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#jobs:
+#  build-and-run-odoo:
+#    runs-on: self-hosted
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v4
 
-      - name: Build and run Odoo with Docker Compose
-        run: docker-compose up -d --build
+#      - name: Build and run Odoo with Docker Compose
+#        run: docker-compose up -d --build
 
-      - name: Wait for Odoo to start (optional)
-        run: sleep 300 # Adjust as needed for Odoo to fully initialize
+#      - name: Wait for Odoo to start (optional)
+#        run: sleep 300 # Adjust as needed for Odoo to fully initialize
 
-      - name: Run Odoo Tests (optional)
+#      - name: Run Odoo Tests (optional)
         # Example: Replace with your actual Odoo test command
-        run: docker exec odoo-main odoo --test-enable -d odoo_db 
+#        run: docker exec odoo-main odoo --test-enable -d odoo_db 
 # --addons-path=/mnt/extra-addons --stop-after-init
-      - name: Stop and clean up containers
-        if: always() # Ensure this step runs even if previous steps fail
-        run: docker-compose down
+#      - name: Stop and clean up containers
+#        if: always() # Ensure this step runs even if previous steps fail
+#        run: docker-compose down
