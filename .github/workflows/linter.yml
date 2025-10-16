@@ -86,7 +86,7 @@ jobs:
 
       - name: Run Odoo Tests (optional)
         # Example: Replace with your actual Odoo test command
-        run: docker exec odoo_odoo_1 odoo --test-enable --addons-path=/mnt/extra-addons -d odoo_db --stop-after-init
+        run: docker exec odoo-main odoo --test-enable --addons-path=/mnt/extra-addons -d odoo_db --stop-after-init
 
       - name: Stop and clean up containers
         if: always() # Ensure this step runs even if previous steps fail
