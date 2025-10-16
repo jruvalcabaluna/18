@@ -1,28 +1,37 @@
-# docker-compose.yml
-version: '3.8'
 services:
-  db:
-    image: postgres:16 # Or your desired PostgreSQL version
+  db-main:  # PostgreSQL service for main environment
+    image: postgres:15
+    container_name: db-main
     environment:
-      - POSTGRES_DB=odoo_db
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo_password
-    volumes:
-      - odoo-db-data:/var/lib/postgresql/data
-
-  odoo:
-    build: . # Build from the Dockerfile in the current directory
-    ports:
-      - "8069:8069" # Odoo web interface
-    environment:
-      - HOST=localhost
-      - USER=odoo
-      - PASSWORD=odoo
+      - POSTGRES_USER=odoo_main
+      - POSTGRES_PASSWORD=odoo_main
+      - POSTGRES_DB=postgres
+  odoo-main:  # Odoo service for main environment
+    image: odoo:17.0
+    container_name: odoo-main
     depends_on:
-      - db
-    volumes:
-      - odoo-web-data:/var/lib/odoo
-
-volumes:
-  odoo-db-data:
-  odoo-web-data:
+      - db-main
+    environment:
+      - HOST=db-main
+      - USER=odoo_main
+      - PASSWORD=odoo_main
+    ports:
+      - "8081:8069"
+  db-staging:  # PostgreSQL service for staging environment
+    image: postgres:15
+    container_name: db-staging
+    environment:
+      - POSTGRES_USER=odoo_staging
+      - POSTGRES_PASSWORD=odoo_staging
+      - POSTGRES_DB=postgres
+  odoo-staging:  # Odoo service for staging environment
+    image: odoo:17.0
+    container_name: odoo-staging
+    depends_on:
+      - db-staging
+    environment:
+      - HOST=db-staging
+      - USER=odoo_staging
+      - PASSWORD=odoo_staging
+    ports:
+      - "8082:8069"
