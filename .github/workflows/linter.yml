@@ -72,8 +72,8 @@ jobs:
         #  ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
         run: unzip -o ./odoo.zip -d /tmp/odoo_restore
         
-      - name: Add user to sudoers
-        run: echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
+      #- name: Add user to sudoers
+      #  run: echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
         
       - name: Change to postgres user
         run: sudo su postgres
