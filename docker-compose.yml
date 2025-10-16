@@ -33,5 +33,8 @@ services:
       - HOST=db-staging
       - USER=odoo_staging
       - PASSWORD=odoo_staging
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
     ports:
       - "8082:8069"
