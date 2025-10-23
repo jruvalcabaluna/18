@@ -57,8 +57,8 @@ jobs:
       - name: Build Docker image (only if linters passed)
         if: ${{ success() }}
         env:
-        ODOO_VERSION: "17"
-        IMAGE_NAME: "odoo17-enterprise:latest"
+          ODOO_VERSION: "17"
+          IMAGE_NAME: "odoo17-enterprise:latest"
         run: |
           echo "Building Docker image ${IMAGE_NAME}..."
           docker build --pull -t ${IMAGE_NAME} -f Dockerfile .
