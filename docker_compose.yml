@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+db:
+image: postgres:15
+environment:
+POSTGRES_DB: odoo
+POSTGRES_USER: odoo
+POSTGRES_PASSWORD: odoo
+volumes:
+- db-data:/var/lib/postgresql/data
+
+
+odoo:
+build: .
+image: odoo17-enterprise:latest
+depends_on:
+- db
+ports:
+- '8068:8068'
+environment:
+- HOST=odoo
+- USER=odoo
+volumes:
+- ./addons:/mnt/extra-addons:ro
+- ./enterprise:/enterprise:ro
+
+
+volumes:
+db-data:
