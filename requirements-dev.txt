@@ -1,0 +1,10 @@
+pre-commit>=3.4.0
+pre-commit-vauxoo>=5.0.0
+pylint-odoo>=9.3.0
+flake8>=6.0.0
+black>=24.0
+isort>=5.0
+
+
+# utilidades opcionales
+pandas
