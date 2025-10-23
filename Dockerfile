@@ -35,7 +35,7 @@ USER odoo
 
 
 # Exponer puerto estándar
-EXPOSE 8069
+EXPOSE 8068
 
 
 # Entrypoint por defecto ya viene en la imagen oficial de odoo
