@@ -1,0 +1,295 @@
+# Archivos para CI: GitHub Actions + pre-commit + build Docker Odoo 17 Enterprise
+
+Este documento contiene un conjunto de archivos listos para agregar a tu repositorio. Están pensados para ejecutarse en un **runner self-hosted** (servidor propio). Incluye:
+
+* `.github/workflows/odoo-ci.yml` — workflow que corre en `push` sobre ramas (configurable), ejecuta pre-commit (incluye hooks de Vauxoo/OCA) y, si todo pasa, construye una imagen Docker con Odoo 17 Enterprise.
+* `.pre-commit-config.yaml` — configuración con hooks comunes (black, isort, flake8, pylint-odoo, oca hooks, pre-commit-vauxoo).
+* `Dockerfile` — Dockerfile para construir una imagen de Odoo 17 Enterprise (asume que el código `enterprise` está incluido en el repo o submódulo en `/enterprise`).
+* `docker-compose.yml` — plantilla para levantar Odoo + Postgres (útil localmente/runner si lo deseas).
+* `requirements-dev.txt` — dependencias para linters y pre-commit.
+* `.pylintrc` — configuración mínima para pylint-odoo.
+* `README_CI.md` — indicaciones rápidas para preparar el runner y añadir el código Enterprise/licencia.
+
+---
+
+## Archivo: `.github/workflows/odoo-ci.yml`
+
+```yaml
+name: Odoo CI (pre-commit + build Docker)
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  lint-and-build:
+    name: Lint & Build
+    runs-on: [self-hosted, linux, x86_64]
+    # Si tu self-hosted runner tiene etiquetas específicas, cámbialas arriba
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dev requirements (pre-commit & linters)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Install pre-commit hooks (local cache)
+        run: |
+          pre-commit install || true
+          pre-commit autoupdate || true
+
+      - name: Run pre-commit on all files
+        id: precommit
+        run: |
+          # Ejecuta todos los hooks definidos; falla si algún hook falla
+          pre-commit run --all-files
+
+      - name: Build Docker image (only if linters passed)
+        if: ${{ success() }}
+        env:
+          ODOO_VERSION: "17"
+          IMAGE_NAME: "odoo17-enterprise:latest"
+        run: |
+          echo "Building Docker image ${IMAGE_NAME}..."
+          docker build --pull -t ${IMAGE_NAME} -f Dockerfile .
+
+      - name: Save image tar (optional, useful on self-hosted runners)
+        if: ${{ success() }}
+        run: |
+          docker save odoo17-enterprise:latest -o odoo17-enterprise.tar || true
+
+      - name: Post-build notes
+        if: ${{ success() }}
+        run: |
+          echo "Docker image built: odoo17-enterprise:latest"
+          echo "If you want to push to a registry, add steps (docker login + docker push) with secrets."
+```
+
+---
+
+## Archivo: `.pre-commit-config.yaml`
+
+```yaml
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        args: ["--line-length=100"]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile=black"]
+
+  - repo: https://github.com/OCA/pylint-odoo
+    rev: 'v9.3.22'
+    hooks:
+      - id: pylint_odoo
+        name: pylint-odoo
+        args: ["--rcfile=.pylintrc"]
+
+  - repo: https://github.com/OCA/odoo-pre-commit-hooks
+    rev: main
+    hooks:
+      - id: check-xml
+      - id: check-manifest # si aplica
+
+  - repo: https://github.com/vauxoo/pre-commit-vauxoo
+    rev: main
+    hooks:
+      - id: pre-commit-vauxoo
+        name: pre-commit-vauxoo
+        # Este hook integra varias comprobaciones de Vauxoo; se configura según sus docs
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        args: ["--max-line-length=100"]
+
+# Puedes añadir hooks locales si necesitas pruebas específicas del proyecto
+# - repo: local
+#   hooks:
+#     - id: run-tests
+#       name: Run tests
+#       entry: ./scripts/run_tests.sh
+#       language: system
+#       files: ^tests/.*\n
+```
+
+**Nota:** revisa y ajusta las versiones (`rev`) a las que uses en tu organización. Los repos `OCA` y `vauxoo` ofrecen varios hooks útiles para proyectos Odoo.
+
+---
+
+## Archivo: `requirements-dev.txt`
+
+```
+pre-commit>=3.4.0
+pre-commit-vauxoo>=5.0.0
+pylint-odoo>=9.3.0
+flake8>=6.0.0
+black>=24.0
+isort>=5.0
+
+# utilidades opcionales
+pandas
+```
+
+---
+
+## Archivo: `.pylintrc`
+
+```ini
+[MASTER]
+load-plugins=pylint_odoo
+
+[FORMAT]
+max-line-length=100
+
+[MESSAGES CONTROL]
+# Desactiva mensajes que normalmente generan falsos positivos en módulos Odoo
+disable=
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring
+
+[ODOO]
+addons-path=addons,enterprise
+```
+
+---
+
+## Archivo: `Dockerfile`
+
+```Dockerfile
+# Dockerfile para construir Odoo 17 Enterprise
+# Nota: necesitas el código fuente de Odoo Enterprise (no público) como submódulo
+# o en una carpeta /enterprise dentro del repo. Si tienes licencia, coloca los
+# módulos en /enterprise/addons y configúralo como se indica aquí.
+
+FROM odoo:17
+
+# Crea directorios
+USER root
+RUN mkdir -p /mnt/extra-addons /enterprise/addons
+
+# Copia los addons (asume que el repo contiene la carpeta enterprise/ con código licenciado)
+# Si mantienes enterprise en un submódulo privado, asegúrate de que el runner tenga acceso.
+COPY ./enterprise /enterprise
+COPY ./addons /mnt/extra-addons
+
+# Instala dependencias extra si es necesario
+COPY ./requirements.txt /tmp/requirements.txt
+RUN if [ -f /tmp/requirements.txt ]; then pip install -r /tmp/requirements.txt; fi
+
+# Ajusta permisos
+RUN chown -R odoo:odoo /enterprise /mnt/extra-addons
+
+# Ajusta variables de entorno para que Odoo cargue los addons Enterprise
+ENV ODOO_ADDONS_PATH=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/enterprise
+
+USER odoo
+
+# Exponer puerto estándar
+EXPOSE 8069
+
+# Entrypoint por defecto ya viene en la imagen oficial de odoo
+
+```
+
+---
+
+## Archivo: `docker-compose.yml` (plantilla)
+
+```yaml
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  odoo:
+    build: .
+    image: odoo17-enterprise:latest
+    depends_on:
+      - db
+    ports:
+      - '8069:8069'
+    environment:
+      - HOST=odoo
+      - USER=odoo
+    volumes:
+      - ./addons:/mnt/extra-addons:ro
+      - ./enterprise:/enterprise:ro
+
+volumes:
+  db-data:
+```
+
+---
+
+## Archivo: `README_CI.md`
+
+```md
+# Notas para el CI en runner self-hosted
+
+1. **Runner**: Instala y registra un runner self-hosted en GitHub. Asegúrate de que el runner tenga:
+   - Docker (daemon) instalado y que el usuario del runner pueda ejecutar `docker build`.
+   - Python 3.10 (o un interprete compatible) y `pip`.
+   - Acceso al repositorio privado/submódulo de Enterprise si lo usas (SSH key o token configurado).
+
+2. **Etiquetas**: Si tu runner tiene una etiqueta personalizada, cámbiala en `runs-on` del workflow.
+
+3. **Enterprise**: Odoo Enterprise no es código público; el Dockerfile asume que colocas los módulos en `enterprise/` dentro del repo o como submódulo. Alternativamente, monta los addons desde un volumen en producción.
+
+4. **Secretos (opcional)**: Si quieres subir la imagen a un registry, añade pasos `docker login` y `docker push` usando secretos `DOCKERHUB_USERNAME` y `DOCKERHUB_TOKEN`.
+
+5. **Pre-commit**: El workflow ejecuta `pre-commit run --all-files`. Si quieres ejecutar sólo archivos cambiados en commits, usa `pre-commit run --from-ref origin/main --to-ref HEAD` o la configuración que prefieras.
+
+```
+
+---
+
+## Cómo usar
+
+1. Añade estos archivos al root de tu repositorio (respeta rutas).
+2. Asegúrate de que el runner self-hosted esté disponible y tenga Docker instalado.
+3. Si usas código Enterprise privado, súbelo como submódulo privado o asegúrate de que el runner tenga acceso.
+
+---
+
+*He incluido versiones/ejemplos razonables de hooks y herramientas. Revisa los `rev`/versiones en `.pre-commit-config.yaml` y `requirements-dev.txt` y ajústalas a la política de tu organización.*
