@@ -87,8 +87,8 @@ COPY ./odoo.conf /etc/odoo/
 RUN chown odoo /etc/odoo/odoo.conf \
     && mkdir -p /mnt/extra-addons \
     && chown -R odoo /mnt/extra-addons
-    && git clone https://github.com/Jarsa/mtnmx-sh.git mtnmx
-    $$ cp -R mtnmx/* /mtn/extra-addons
+RUN git clone https://github.com/Jarsa/mtnmx-sh.git mtnmx
+RUN cp -R mtnmx/* /mtn/extra-addons
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Expose Odoo services
