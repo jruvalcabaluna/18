@@ -1,0 +1,18 @@
+[MASTER]
+load-plugins=pylint_odoo
+
+
+[FORMAT]
+max-line-length=100
+
+
+[MESSAGES CONTROL]
+# Desactiva mensajes que normalmente generan falsos positivos en módulos Odoo
+disable=
+missing-module-docstring,
+missing-class-docstring,
+missing-function-docstring
+
+
+[ODOO]
+addons-path=addons,enterprise
