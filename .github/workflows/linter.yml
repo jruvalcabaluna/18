@@ -51,7 +51,7 @@ jobs:
         id: precommit
         run: |
           # Ejecuta todos los hooks definidos; falla si algún hook falla
-          pre-commit-vauxoo run -t all
+          pre-commit-vauxoo -t all
       
       
       - name: Build Docker image (only if linters passed)
