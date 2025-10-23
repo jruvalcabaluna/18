@@ -65,17 +65,17 @@ jobs:
         run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
 
       - name: Start Odoo Instance
-        run: docker run -d -p 8069:8069 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
+        run: docker run -d -p 8068:8068 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
 
-      - name: Unzip Database
+      #- name: Unzip Database
         #env:
         #  ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
-        run: unzip -o ./odoo.zip -d /tmp/odoo_restore
+      #  run: unzip -o ./odoo.zip -d /tmp/odoo_restore
         
       #- name: Add user to sudoers
       #  run: echo "odoo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/odoo
-      - name: Restore database
-        run: psql -h localhost -U odoo -d odoo -f /tmp/odoo_restore/dump.sql
+      #- name: Restore database
+      #  run: psql -h localhost -U odoo -d odoo -f /tmp/odoo_restore/dump.sql
              
               # Example for using pg_restore for a custom pg_dump:
               # pg_restore -d ${{ github.event.inputs.db_name }} -U odoo -h <DB_HOST> -p 5432 ${{ github.event.inputs.backup_file_path }}
