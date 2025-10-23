@@ -87,10 +87,12 @@ COPY ./odoo.conf /etc/odoo/
 RUN chown odoo /etc/odoo/odoo.conf \
     && mkdir -p /mnt/extra-addons \
     && chown -R odoo /mnt/extra-addons
+    && git clone https://github.com/Jarsa/mtnmx-sh.git mtnmx
+    $$ cp -R mtnmx/* /mtn/extra-addons
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Expose Odoo services
-EXPOSE 8069 8071 8072
+EXPOSE 8068 8071 8072
 
 # Set the default config file
 ENV ODOO_RC=/etc/odoo/odoo.conf
