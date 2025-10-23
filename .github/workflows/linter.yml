@@ -7,6 +7,75 @@ on:
         - "18"
   workflow_dispatch:
 jobs:
+  lint-and-build:
+    name: Lint & Build
+    runs-on: self-hosted
+# Si tu self-hosted runner tiene etiquetas específicas, cámbialas arriba
+
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+    
+    
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+    
+    
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      
+      - name: Install dev requirements (pre-commit & linters)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      
+      
+      - name: Install pre-commit hooks (local cache)
+        run: |
+          pre-commit install || true
+          pre-commit autoupdate || true
+      
+      
+      - name: Run pre-commit on all files
+        id: precommit
+        run: |
+          # Ejecuta todos los hooks definidos; falla si algún hook falla
+          pre-commit run --all-files
+      
+      
+      - name: Build Docker image (only if linters passed)
+        if: ${{ success() }}
+        env:
+        ODOO_VERSION: "17"
+        IMAGE_NAME: "odoo17-enterprise:latest"
+        run: |
+          echo "Building Docker image ${IMAGE_NAME}..."
+          docker build --pull -t ${IMAGE_NAME} -f Dockerfile .
+      
+      
+      - name: Save image tar (optional, useful on self-hosted runners)
+        if: ${{ success() }}
+        run: |
+          docker save odoo17-enterprise:latest -o odoo17-enterprise.tar || true
+      
+      
+      - name: Post-build notes
+        if: ${{ success() }}
+        run: |
+          echo "Docker image built: odoo17-enterprise:latest"
+          echo "If you want to push to a registry, add steps (docker login + docker push) with secrets."
+#jobs:
 #  Builds:
 #    runs-on: self-hosted
 #    steps:
@@ -29,43 +98,43 @@ jobs:
 #      - name: Version SO
 #        run: cat /etc/os-releasebuild-and-push
 
-  build-and-push:
-    runs-on: self-hosted
-    continue-on-error: true
-    steps:
-      - name: Checkout del código
-        uses: actions/checkout@v4
+  #build-and-push:
+    #runs-on: self-hosted
+    #continue-on-error: true
+    #steps:
+      #- name: Checkout del código
+      #  uses: actions/checkout@v4
 
-      - name: Iniciar sesión en Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: "jruvalcaba@nubuserp.com"
-          password: "dckr_pat_UG69kz0EwfryzQjkltGpOfGC3fQ"
+      #- name: Iniciar sesión en Docker Hub
+      #  uses: docker/login-action@v3
+      #  with:
+      #    username: "jruvalcaba@nubuserp.com"
+      #    password: "dckr_pat_UG69kz0EwfryzQjkltGpOfGC3fQ"
 
-      - name: Construir y empujar la imagen
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
+      #- name: Construir y empujar la imagen
+      #  uses: docker/build-push-action@v5
+      #  with:
+      #    context: .
+      #    push: true
+      #    tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
 
-      - name: Stop all docker instances
-        run: docker stop $(docker ps -aq)
+      #- name: Stop all docker instances
+      #  run: docker stop $(docker ps -aq)
 
-      - name: Remove all containers
-        run: docker rm $(docker ps -a -q)
+      #- name: Remove all containers
+      #  run: docker rm $(docker ps -a -q)
 
-      - name: Remove all images
-        run: docker rmi $(docker images -a -q) --force
+      #- name: Remove all images
+      #  run: docker rmi $(docker images -a -q) --force
         
-      - name: Pull Docker Image
-        run: docker pull jruvalcabaluna/odoo:latest
+      #- name: Pull Docker Image
+      #  run: docker pull jruvalcabaluna/odoo:latest
 
-      - name: Start Postgresql
-        run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
+      #- name: Start Postgresql
+      #  run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
 
-      - name: Start Odoo Instance
-        run: docker run -d -p 8068:8068 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
+      #- name: Start Odoo Instance
+      #  run: docker run -d -p 8068:8068 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
 
       #- name: Unzip Database
         #env:
