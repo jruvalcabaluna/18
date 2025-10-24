@@ -47,11 +47,11 @@ jobs:
           pre-commit autoupdate || true
       
       
-      #- name: Run pre-commit on all files
-      #  id: precommit
-      #  run: |
+      - name: Run pre-commit on all files
+        id: precommit
+        run: |
           # Ejecuta todos los hooks definidos; falla si algún hook falla
-      #    pre-commit-vauxoo -t all
+          pre-commit-vauxoo -p ./mtnmx
       
       
       - name: Build Docker image (only if linters passed)
