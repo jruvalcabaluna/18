@@ -51,11 +51,11 @@ jobs:
         id: precommit
         run: |
           # Ejecuta todos los hooks definidos; falla si algún hook falla
-          pre-commit-vauxoo -p ./mtnmx
-
-      - name: Restart Odoo 17E
-        if: ${{ success() }}
-        run: sudo /etc/init.d/17e restart
+          pre-commit-vauxoo -p dev
+          
+      #- name: Restart Odoo 17E
+      #  if: ${{ success() }}
+      #  run: sudo /etc/init.d/17e restart
         
       #- name: Build Docker image (only if linters passed)
         #if: ${{ success() }}
@@ -108,36 +108,36 @@ jobs:
       #- name: Checkout del código
       #  uses: actions/checkout@v4
 
-      #- name: Iniciar sesión en Docker Hub
-      #  uses: docker/login-action@v3
-      #  with:
-      #    username: "jruvalcaba@nubuserp.com"
-      #    password: "dckr_pat_UG69kz0EwfryzQjkltGpOfGC3fQ"
+      - name: Iniciar sesión en Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: "jruvalcaba@nubuserp.com"
+          password: "dckr_pat_UG69kz0EwfryzQjkltGpOfGC3fQ"
 
-      #- name: Construir y empujar la imagen
-      #  uses: docker/build-push-action@v5
-      #  with:
-      #    context: .
-      #    push: true
-      #    tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
+      - name: Construir y empujar la imagen
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: jruvalcabaluna/odoo:latest # Reemplaza con tus datos
 
-      #- name: Stop all docker instances
-      #  run: docker stop $(docker ps -aq)
+      - name: Stop all docker instances
+        run: docker stop $(docker ps -aq)
 
-      #- name: Remove all containers
-      #  run: docker rm $(docker ps -a -q)
+      - name: Remove all containers
+        run: docker rm $(docker ps -a -q)
 
-      #- name: Remove all images
-      #  run: docker rmi $(docker images -a -q) --force
+      - name: Remove all images
+        run: docker rmi $(docker images -a -q) --force
         
-      #- name: Pull Docker Image
-      #  run: docker pull jruvalcabaluna/odoo:latest
+      - name: Pull Docker Image
+        run: docker pull jruvalcabaluna/odoo:latest
 
-      #- name: Start Postgresql
-      #  run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
+      - name: Start Postgresql
+        run: docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db postgres:15
 
-      #- name: Start Odoo Instance
-      #  run: docker run -d -p 8068:8068 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
+      - name: Start Odoo Instance
+        run: docker run -d -p 8068:8068 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
 
       #- name: Unzip Database
         #env:
