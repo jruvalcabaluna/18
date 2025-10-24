@@ -14,37 +14,37 @@ jobs:
 
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      #- name: Checkout code
+      #  uses: actions/checkout@v4
+      #  with:
+      #    fetch-depth: 0
     
     
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+      #- name: Set up Python
+      #  uses: actions/setup-python@v4
+      #  with:
+      #    python-version: '3.10'
     
     
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+      #- name: Cache pip
+      #  uses: actions/cache@v4
+      #  with:
+      #    path: ~/.cache/pip
+      #    key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-dev.txt') }}
+      #    restore-keys: |
+      #      ${{ runner.os }}-pip-
       
       
-      - name: Install dev requirements (pre-commit & linters)
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
+      #- name: Install dev requirements (pre-commit & linters)
+      #  run: |
+      #    python -m pip install --upgrade pip
+      #    pip install -r requirements-dev.txt
       
       
-      - name: Install pre-commit hooks (local cache)
-        run: |
-          pre-commit install || true
-          pre-commit autoupdate || true
+      #- name: Install pre-commit hooks (local cache)
+      #  run: |
+      #    pre-commit install || true
+      #    pre-commit autoupdate || true
       
       
       - name: Run pre-commit on all files
@@ -52,29 +52,32 @@ jobs:
         run: |
           # Ejecuta todos los hooks definidos; falla si algún hook falla
           pre-commit-vauxoo -p ./mtnmx
-      
-      
-      - name: Build Docker image (only if linters passed)
+
+      - name: Restart Odoo 17E
+        if: ${{ success() }}
+        run: sudo /etc/init.d/17e restart
+        
+      #- name: Build Docker image (only if linters passed)
         #if: ${{ success() }}
-        env:
-          ODOO_VERSION: "17"
-          IMAGE_NAME: "odoo17-enterprise:latest"
-        run: |
-          echo "Building Docker image ${IMAGE_NAME}..."
-          docker build --pull -t ${IMAGE_NAME} -f Dockerfile .
+      #  env:
+      #    ODOO_VERSION: "17"
+      #    IMAGE_NAME: "odoo17-enterprise:latest"
+      #  run: |
+      #    echo "Building Docker image ${IMAGE_NAME}..."
+      #    docker build --pull -t ${IMAGE_NAME} -f Dockerfile .
       
       
-      - name: Save image tar (optional, useful on self-hosted runners)
-        if: ${{ success() }}
-        run: |
-          docker save odoo17-enterprise:latest -o odoo17-enterprise.tar || true
+      #- name: Save image tar (optional, useful on self-hosted runners)
+      #  if: ${{ success() }}
+      #  run: |
+      #    docker save odoo17-enterprise:latest -o odoo17-enterprise.tar || true
       
       
-      - name: Post-build notes
-        if: ${{ success() }}
-        run: |
-          echo "Docker image built: odoo17-enterprise:latest"
-          echo "If you want to push to a registry, add steps (docker login + docker push) with secrets."
+      #- name: Post-build notes
+      #  if: ${{ success() }}
+      #  run: |
+      #    echo "Docker image built: odoo17-enterprise:latest"
+      #    echo "If you want to push to a registry, add steps (docker login + docker push) with secrets."
 #jobs:
 #  Builds:
 #    runs-on: self-hosted
