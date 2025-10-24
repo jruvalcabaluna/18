@@ -16,7 +16,9 @@ RUN mkdir -p /mnt/extra-addons /enterprise/addons
 # Si mantienes enterprise en un submódulo privado, asegúrate de que el runner tenga acceso.
 COPY ./addons /enterprise
 COPY ./mtnmx /mnt/extra-addons
-
+RUN cd /mtn/extra_addons && \
+    git submodule init && \
+    git submodule update --recursive
 
 # Instala dependencias extra si es necesario
 #COPY ./requirements.txt /tmp/requirements.txt
