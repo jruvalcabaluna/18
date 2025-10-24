@@ -1,0 +1,3 @@
+[submodule "mtnmx"]
+	path = mtnmx
+	url = https://github.com/Jarsa/mtnmx-sh.git
