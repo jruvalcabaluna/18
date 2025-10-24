@@ -139,6 +139,9 @@ jobs:
       - name: Start Odoo Instance
         run: docker run -d -p 8069:8069 -v ./config:/etc/odoo --name odoo --link db:db -t odoo
 
+      - name: Create Odoo database
+        run: |
+          docker compose exec odoo odoo -d mtnmx_dev -i base --without-demo=all --load-language=en_US
       #- name: Unzip Database
         #env:
         #  ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
