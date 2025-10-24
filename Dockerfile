@@ -14,8 +14,8 @@ RUN mkdir -p /mnt/extra-addons /enterprise/addons
 
 # Copia los addons (asume que el repo contiene la carpeta enterprise/ con código licenciado)
 # Si mantienes enterprise en un submódulo privado, asegúrate de que el runner tenga acceso.
-COPY ./enterprise /enterprise
-COPY ./addons /mnt/extra-addons
+COPY ./addons /enterprise
+#COPY ./addons /mnt/extra-addons
 
 
 # Instala dependencias extra si es necesario
