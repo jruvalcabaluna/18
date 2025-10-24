@@ -16,7 +16,7 @@ image: odoo17-enterprise:latest
 depends_on:
 - db
 ports:
-- '8068:8068'
+- '8069:8069'
 environment:
 - HOST=odoo
 - USER=odoo
