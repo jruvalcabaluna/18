@@ -89,8 +89,11 @@ RUN chown odoo /etc/odoo/odoo.conf \
     && chown -R odoo /mnt/extra-addons
 VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
-RUN git clone https://github.com/Jarsa/mtnmx-sh.git mtnmx
-RUN cp -R mtnmx/* /mtn/extra-addons/
+RUN cd /mtn/extra_addons && \
+    git submodule init && \
+    git submodule update --recursive
+#RUN git clone https://github.com/Jarsa/mtnmx-sh.git mtnmx
+#RUN cp -R mtnmx/* /mtn/extra-addons/
 
 # Expose Odoo services
 EXPOSE 8068 8071 8072
