@@ -19,8 +19,8 @@ COPY ./mtnmx /mnt/extra-addons
 
 
 # Instala dependencias extra si es necesario
-COPY ./requirements.txt /tmp/requirements.txt
-RUN if [ -f /tmp/requirements.txt ]; then pip install -r /tmp/requirements.txt; fi
+#COPY ./requirements.txt /tmp/requirements.txt
+#RUN if [ -f /tmp/requirements.txt ]; then pip install -r /tmp/requirements.txt; fi
 
 
 # Ajusta permisos
