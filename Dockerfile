@@ -96,7 +96,7 @@ RUN cd /mtn/extra_addons && \
 #RUN cp -R mtnmx/* /mtn/extra-addons/
 
 # Expose Odoo services
-EXPOSE 8068 8071 8072
+EXPOSE 8069 8071 8072
 
 # Set the default config file
 ENV ODOO_RC=/etc/odoo/odoo.conf
