@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+
+    <record id="partner_portal_repse" model="res.partner.category">
+        <field name="name">Only REPSE on portal</field>
+        <field name="active">True</field>
+        <field name="color">10</field>
+    </record>
+
+    <record id="ir_sequence_repse" model="ir.sequence">
+        <field name="name">REPSE</field>
+        <field name="implementation">standard</field>
+        <field name="active">True</field>
+        <field name="prefix">REPSE/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <record id="email_template_repse_docs" model="mail.template">
+        <field name="name">Repse notification by email</field>
+        <field name="model_id" ref="repse_mtnmx.model_document_repse" />
+        <field name="email_from">{{ (object.repse_user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field name="subject">{{ object.company_id.name }} Repse (Ref {{ object.name or 'n/a' }})</field>
+        <field name="body_html" type="html">
+
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Good morning, we remind you that you have pending REPSE documentation, which you must submit no later than the 8th of this month.
+                    <t t-if="object.repse_user_id.signature">
+                        <br />
+                        <t t-out="object.repse_user_id.signature or ''">--<br />Mitchell Admin</t>
+                    </t>
+                </p>
+            </div>
+        </field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True" />
+    </record>
+
+    <record id="mail_activity_team_repse" model="mail.activity.team">
+        <field name="name">Activities for REPSE</field>
+        <field name="res_model_ids" eval="[(4, ref('repse_mtnmx.model_document_repse'))]" />
+    </record>
+
+    <record id="mail_act_repse_review" model="mail.activity.type">
+        <field name="name">Repse docs review</field>
+        <field name="icon">fa-sun-o</field>
+        <field name="res_model">document.repse</field>
+    </record>
+
+</odoo>

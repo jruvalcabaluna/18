@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="invoice_repse_form_view" model="ir.ui.view">
+        <field name="name">invoice.repse.form.view</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='to_check']" position="after">
+                    <field name="repse_group" invisible="1" />
+                    <field name="repse_in_process_count" invisible="1" />
+                    <field name="repse_id" readonly="1" force_save="1" nolabel="1" invisible="1" />
+                    <field
+                    name="repse_state"
+                    decoration-success="repse_state == 'positive'"
+                    decoration-danger="repse_state != 'positive'"
+                    string="Repse Status"
+                    invisible="1"
+                />
+                    <!-- <field name="repse_update" invisible="1" /> -->
+                    <span
+                    invisible="repse_state != 'process' or (move_type != 'in_invoice' and not repse_group)"
+                    groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager"
+                >Repse state</span>
+                    <button
+                    name="action_view_in_process"
+                    string="In process"
+                    invisible="repse_state != 'process' or (move_type != 'in_invoice' and not repse_group)"
+                    type="object"
+                    class="oe_stat_button btn-outline-danger"
+                    icon="fa-file-text-o"
+                    groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager">
+                        <field name="repse_in_process_count" widget="statinfo" string=" Repse in process" />
+                    </button>
+            </xpath>
+            <xpath expr="//form/sheet" position="before">
+                <div class="alert alert-warning oe_edit_only" role="alert" invisible="repse_state != 'process' or (move_type != 'in_invoice' and not repse_group)">
+                  This partner have incomplete repse documentation in the following documents
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

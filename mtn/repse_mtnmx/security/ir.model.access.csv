@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_document_repse_user,access_document_repse,model_document_repse,repse_mtnmx.group_repse_user,1,0,0,0
+access_document_repse_line_user,access_document_repse_line,model_document_repse_line,repse_mtnmx.group_repse_user,1,0,0,0
+access_document_repse,access_document_repse,model_document_repse,repse_mtnmx.group_repse_manager,1,1,1,1
+access_document_repse_line,access_document_repse_line,model_document_repse_line,repse_mtnmx.group_repse_manager,1,1,1,1
+access_document_repse_portal,access_document_repse_portal,model_document_repse,repse_mtnmx.group_repse_portal,1,0,0,0
+access_document_repse_line_portal,access_document_repse_line_portal,model_document_repse_line,repse_mtnmx.group_repse_portal,1,0,0,0
+access_repse_wizard,access_repse_wizard,model_repse_wizard,repse_mtnmx.group_repse_manager,1,1,1,1
