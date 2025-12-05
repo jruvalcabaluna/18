@@ -46,11 +46,11 @@ jobs:
       #    pre-commit autoupdate || true
       
       
-      - name: Run pre-commit on all files
-        id: precommit
-        run: |
+      #- name: Run pre-commit on all files
+      #  id: precommit
+      #  run: |
           # Ejecuta todos los hooks definidos; falla si algún hook falla
-          pre-commit-vauxoo -p dev
+      #    pre-commit-vauxoo -p dev
           
       #- name: Restart Odoo 17E
       #  if: ${{ success() }}
@@ -81,18 +81,18 @@ jobs:
 #  Builds:
 #    runs-on: self-hosted
 #    steps:
-#      - uses: actions/checkout@v4
-#      # Setup python #
-#      - name: Set Up Python 3.11
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version: 3.11
+      - uses: actions/checkout@v4
+      # Setup python #
+      - name: Set Up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
           
-#      - name: Install pre-commit-vauxoo
-#        run: pip install pre-commit-vauxoo
+      - name: Install pre-commit-vauxoo
+        run: pip install pre-commit-vauxoo
 
-#      - name: Run pre-commit-vauxoo checks
-#        run: pre-commit-vauxoo -t all # Or specify your desired pre-commit-vauxoo arguments
+      - name: Run pre-commit-vauxoo checks
+        run: pre-commit-vauxoo -t all # Or specify your desired pre-commit-vauxoo arguments
             
 #      - name: Listar directorios
 #        run: ls -l
