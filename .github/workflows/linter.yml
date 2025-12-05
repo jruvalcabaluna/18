@@ -50,7 +50,7 @@ jobs:
         id: precommit
         run: |
           # Ejecuta todos los hooks definidos; falla si algún hook falla
-          pre-commit-vauxoo -p dev
+          pre-commit-vauxoo -p mtn
           
       #- name: Restart Odoo 17E
       #  if: ${{ success() }}
