@@ -312,7 +312,7 @@ class DocumentRepse(models.Model):
     def check_is_cancel(self):
         for rec in self.filtered(lambda x: x.state != "cancel"):
             raise ValidationError(
-                _("Warning to delete the {} document, has to be on a cancelled state").format(rec.name)
+                _("Warning to delete the {} document, has to be on a cancelled state".format(rec.name))
             )
         return True
 
@@ -572,9 +572,9 @@ class DocumentRepse(models.Model):
                     "repse_mtnmx.mail_act_repse_review"
                 ).id,  # Example: To-Do activity type
                 "team_id": team_id.id,
-                "summary": _("""{} REPSE # {} """).format(
+                "summary": _("""{} REPSE # {} """.format(
                     "Review the documents upload by the supplier.", self.name
-                ),
+                )),
                 "note": _(msg),
                 "date_deadline": date.today() + timedelta(days=3),  # Deadline 3 days from now
                 "user_id": team_id.user_id.id,  # Assign to the current user
@@ -596,7 +596,7 @@ class DocumentRepse(models.Model):
                     repse_doc_list += repse.name + " " + repse.state + "\n" + " - " + _(repse.missing_documents)
 
             rec.sudo().message_post(
-                body=_("""Greetings, you have repse docs to upload {}""").format(repse_doc_list),
+                body=_("""Greetings, you have repse docs to upload {}""".format(repse_doc_list)),
                 subject=_("""Repse documents"""),
                 partner_ids=partners,
                 subtype_xmlid="mail.mt_comment",
@@ -613,8 +613,8 @@ class DocumentRepse(models.Model):
                     body = _(
                         """  Greetings, we remind you that you have pending REPSE documentation,
                         which must be submitted on the 8th and 20th of each month.
-                        We kindly ask that you send it as soon as possible. {} """
-                    ).format(missing_repse)
+                        We kindly ask that you send it as soon as possible. {} """.format(missing_repse)
+                    )
                     email = self.env["ir.mail_server"].build_email(
                         email_from=self.env.user.email,
                         email_to=emails,
@@ -635,7 +635,7 @@ class DocumentRepse(models.Model):
             for purchase in purchase_order_ids:
                 lines_count = len(repse.repse_line_ids.filtered(lambda line: line.purchase_order_id == purchase))
                 if lines_count > 1:
-                    raise ValidationError(_('Purchase {} already added.'.format(purchase.name)))
+                    raise ValidationError(_('Purchase {} already added.').format(purchase.name))
         return True
 
 
