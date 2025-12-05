@@ -506,8 +506,7 @@ class DocumentRepse(models.Model):
 
     def action_generate_auto_repse(self):
         today = date.today()
-        partner_repse_ids = self.env["res.users"].search([])
-        urepse_ids = partner_repse_ids.filtered(lambda x: x.has_group("repse_mtnmx.group_repse_portal"))
+        urepse_ids = self.env["res.users"].search([]).filtered(lambda x: x.has_group("repse_mtnmx.group_repse_portal"))
         prepse_ids = []
         for user in urepse_ids:
             prepse_ids.append(user.partner_id)

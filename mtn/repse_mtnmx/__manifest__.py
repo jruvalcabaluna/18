@@ -30,5 +30,4 @@
         "views/portal_template.xml",
         "wizard/repse_wizard_view.xml",
     ],
-    "installable": True,
 }
