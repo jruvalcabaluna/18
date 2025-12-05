@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="purchase_repse_form_view" model="ir.ui.view">
+        <field name="name">purchase.repse.form.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <!--<div>-->
+                    <!--<field
+                        name="repse_id"
+                        readonly="1"
+                        force_save="1"
+                        invisible="repse_id == False"
+                        nolabel="1"
+                        groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager"
+                    />
+                    <label
+                        for="repse_state"
+                        string="Repse Status"
+                        groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager"
+                        invisible="repse_count == 0"
+                    />
+                    <field
+                        name="repse_state"
+                        decoration-success="repse_state == 'Valid'"
+                        decoration-danger="repse_state != 'Valid'"
+                        invisible="repse_count == 0"
+                        groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager"
+                    />-->
+                    <field name="repse_state" invisible="1"/>
+                    <span
+                    invisible="repse_state == 'Valid' or repse_count == 0"
+                    groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager"
+                >Repse state</span>
+                    <button
+                    name="action_view_repse_documents"
+                    string="In process"
+                    invisible="repse_state == 'Valid' or repse_count == 0"
+                    type="object"
+                    class="oe_stat_button btn-outline-danger"
+                    icon="fa-file-text-o"
+                    groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager">
+                        <field name="repse_count" widget="statinfo" string=" Repse in process" />
+                    </button>
+                <!--</div>-->
+            </xpath>
+            <!--<div name="button_box" position="inside">
+                <button
+                    type="object"
+                    name="action_view_repse_documents"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    invisible="repse_count == 0"
+                    groups="repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager"
+                >
+                    <field name="repse_count" widget="statinfo" string="Repse Docs" />
+                </button>
+            </div>-->
+        </field>
+    </record>
+
+    <record id="action_purchase_repse" model="ir.actions.server">
+        <field name="name">Add purchase on repse document</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="purchase.model_purchase_order" />
+        <field name="binding_model_id" ref="purchase.model_purchase_order" />
+        <field name="state">code</field>
+        <field name="code">model.action_add_repse()</field>
+    </record>
+
+</odoo>

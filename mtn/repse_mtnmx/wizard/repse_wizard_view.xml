@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="repse_wizard_form_view" model="ir.ui.view">
+        <field name="name">repse.wizard.form.view</field>
+        <field name="model">repse.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <span> Create extemporaneous REPSE documents </span>
+                    <field name="repse_partners" invisible="1"/>
+                    <group>
+                        <group>
+                            <field name="all_partners" />
+                            <field
+                                name="partner_id"
+                                readonly="all_partners == True" 
+                                required="all_partners == False"
+                                domain="[('repse_group','=',True)]"
+                            />
+                        </group>
+                        <group>
+                            <field name="all_periods" />
+                            <field
+                                name="date"
+                                required="all_periods == False"
+                                invisible="all_periods == True"
+                            />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_process" type="object" string="Process" class="oe_highlight" />
+                        <button special="cancel" string="Cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_repse_wizard" model="ir.actions.act_window">
+        <field name="name">REPSE Wizard</field>
+        <field name="res_model">repse.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="search_view_id" ref="view_repse_search" />
+        <field name="help">REPSE Docs Registration</field>
+        <field name="target">new</field>
+        <field name="context" />
+    </record>
+
+    <menuitem
+        id="menu_repase_wizard"
+        parent="repse_mtnmx.menu_document_repse"
+        name="REPSE Wizard"
+        sequence="3"
+        action="action_repse_wizard"
+        groups="repse_mtnmx.group_repse_manager"
+    />
+
+
+</odoo>

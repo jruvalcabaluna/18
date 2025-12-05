@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="portal_my_home_repse"
+        name="Partner REPSE"
+        inherit_id="portal.portal_my_home"
+        customize_show="True"
+        priority="40"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/account/static/src/img/Bill.svg'" />
+                <t t-set="title">REPSE</t>
+                <t t-set="url" t-value="'/my/repse'" />
+                <t t-set="text">Follow up and doc upload for REPSE</t>
+                <t t-set="placeholder_count" t-value="'repse_count'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template id="repse" name="REPSE">
+        <t name="repse" t-name="repse_mtnmx.repse">
+
+          <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">REPSE</t>
+            </t>
+            <t t-if="len(repse_ids) == 0">
+                <p class="alert alert-warning">Currently does not exist REPSE docs to upload in your account.</p>
+            </t>
+                  <div class="container" style="background-color:white">
+                      <div id="wrap" class="oe_structure oe_empty">
+                        <div>
+                            <br />
+                            <h1
+                                style="color:#018CD2; font-size:48px; font-weight:bold;"
+                                id="title_registro"
+                            >REPSE</h1><br />
+                            <br />
+                        </div>
+                        <div style="border-style:solid; border-color:#F7871D;" />
+                        <br />
+                        <div>
+                            <t t-call="portal.portal_table" style="font-size:16px; font-weight:bold;">
+                                <thead>
+                                    <tr class="active">
+                                        <th>Name </th>
+                                        <th>Month </th>
+                                        <th>Year </th>
+                                        <th>State</th>
+                                        <th>Missing docs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="repses" t-as="file">
+                                        <tr>
+                                            <td>
+                                                <a t-att-href="file.get_portal_url()" t-att-title="file.name">
+                                                    <t t-out="file.name" t-if="file.name != ''" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <span t-esc="file.repse_date.strftime('%B')" />
+                                            </td>
+                                            <td>
+                                                <span t-esc="file.repse_date.year" />
+                                            </td>
+                                            <td style="font-size: 12px">
+                                                <t t-if="file.state == 'positive'">
+                                                    <span style="color:green">Positive</span>
+                                                </t>
+                                                <t t-if="file.state == 'process'">
+                                                    <span style="color:red">Process</span>
+                                                </t>
+                                            </td>
+                                            <td style="font-size: 12px">
+                                                <t t-if="file.state == 'positive'">
+                                                    No
+                                                </t>
+                                                <t t-if="file.state in ['process']">
+                                                    Yes
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </t>
+                        </div>
+                        <br /><br />
+                    </div>
+              </div>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="portal_repse_page" name="REPSE">
+        <t name="portal_repse_page" t-name="repse_mtnmx.portal_repse_page">
+            <t t-call="portal.portal_layout">
+                <div class="container" style="background-color:white">
+                      <div id="wrap" class="oe_structure oe_empty">
+                        <div>
+                            <br />
+                                <div>
+                                    <h1 style="color:#018CD2; font-size:48px; font-weight:bold;" id="title_registro">
+                                        <span t-field="repse.name" />
+                                    </h1>
+                                </div>
+                            <br />
+                                <div>
+                                    Period <strong><span t-esc="repse.repse_date.strftime('%B')" /> / <span
+                                        t-esc="repse.repse_date.year"
+                                    /></strong>
+                                </div>
+                            <br />
+                        </div>
+                        <div style="border-style:solid; border-color:#F7871D;" />
+                        <br />
+                        <div class="o_portal_my_details">
+                            <form
+                                id="repse-form"
+                                method="post"
+                                enctype="multipart/form-data"
+                                style="color:#015884; font-size:16px; font-weight:bold;"
+                            >
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                <input type="hidden" name="name" t-att-value="repse.name" />
+                                <table class="table">
+                                    <tr>
+                                        <td colspan="4">From 1 to 8 of every month</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>SAT compliance opinion</span>
+                                            <t t-if="repse.opinion_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="opinion"
+                                                    id="opinion"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.opinion_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span
+                                                t-if="repse.opinion_state == 'denied'"
+                                                style="color:red"
+                                            >Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.opinion_state) and bool(repse.opinion) or repse.opinion_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.opinion_state) and not bool(repse.opinion)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                        <td>
+                                            <span>IMSS Compliance</span>
+                                            <t t-if="repse.imss_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="cimss"
+                                                    id="cimss"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.imss_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.imss_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.imss_state) and bool(repse.imss_compliance) or repse.imss_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.imss_state) and not bool(repse.imss_compliance)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Infonavit Compliance</span>
+                                            <t t-if="repse.infonavit_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="cinfonavit"
+                                                    id="cinfonavit"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.infonavit_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span
+                                                t-if="repse.infonavit_state == 'denied'"
+                                                style="color:red"
+                                            >Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.infonavit_state) and bool(repse.infonavit_compliance) or repse.infonavit_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.infonavit_state) and not bool(repse.infonavit_compliance)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                        <td>
+                                            <span>Monthly fiscal constancy</span>
+                                            <t t-if="repse.cfiscal1_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="cfiscal1"
+                                                    id="cfiscal1"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.cfiscal1_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span
+                                                t-if="repse.cfiscal1_state == 'denied'"
+                                                style="color:red"
+                                            >Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.cfiscal1_state) and bool(repse.fiscal_constancy1) or repse.cfiscal1_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.cfiscal1_state) and not bool(repse.fiscal_constancy1)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="repse.no_activity">
+                                        <td>
+                                            <span>No activity written</span>
+                                            <t t-if="repse.na_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="no_activity"
+                                                    id="no_activity"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.na_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.na_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.na_state) and bool(repse.no_activity_file) or repse.na_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.na_state) and not bool(repse.no_activity_file)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td>
+                                            <span>REPSE Activity Doc</span>
+                                            <t t-if="repse.repse_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="repse_doc"
+                                                    id="repse_doc"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.repse_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span
+                                                t-if="repse.repse_state == 'denied'"
+                                                style="color:red"
+                                            >Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.repse_state) and bool(repse.repse_doc) or repse.repse_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.repse_state) and not bool(repse.repse_doc)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td colspan="4">2 bussines days after payment ( Day 16 )</td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td>
+                                            <span>BIM Card</span>
+                                            <t t-if="repse.bim_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="bim"
+                                                    id="bim"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.bim_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.bim_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.bim_state) and bool(repse.bim_card) or repse.bim_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.bim_state) and not bool(repse.bim_card)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                        <td>
+                                            <span>SIPARE Line</span>
+                                            <t t-if="repse.sipare_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="sipare"
+                                                    id="sipare"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.sipare_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span
+                                                t-if="repse.sipare_state == 'denied'"
+                                                style="color:red"
+                                            >Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.sipare_state) and bool(repse.sipare_line) or repse.sipare_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.sipare_state) and not bool(repse.sipare_line)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td>
+                                            <span>Settlement Resume</span>
+                                            <t t-if="repse.settlement_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="settlement"
+                                                    id="settlement"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.settlement_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span
+                                                t-if="repse.settlement_state == 'denied'"
+                                                style="color:red"
+                                            >Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.settlement_state) and bool(repse.settlement_resume) or repse.settlement_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.settlement_state) and not bool(repse.settlement_resume)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                        <td>
+                                            <span>SUA Payment</span>
+                                            <t t-if="repse.sua_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="sua"
+                                                    id="sua"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.sua_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.sua_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.sua_state) and bool(repse.sua_payment) or repse.sua_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.sua_state) and not bool(repse.sua_payment)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td>
+                                            <span>CFDI PAYSHEET</span>
+                                            <t t-if="repse.cfdi_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="cfdi"
+                                                    id="cfdi"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.cfdi_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.cfdi_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.cfdi_state) and bool(repse.cfdi_paysheet) or repse.cfdi_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.cfdi_state) and not bool(repse.cfdi_paysheet)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td colspan="4">2 bussines days after payment ( Day 20 )</td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td>
+                                            <span>IVA Statement</span>
+                                            <t t-if="repse.diva_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="diva"
+                                                    id="diva"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.diva_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.diva_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.diva_state) and bool(repse.iva_statement) or repse.diva_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.diva_state) and not bool(repse.iva_statement)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                        <td>
+                                            <span>IVA Complement</span>
+                                            <t t-if="repse.civa_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="civa"
+                                                    id="civa"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.civa_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.civa_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.civa_state) and bool(repse.iva_complement) or repse.civa_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.civa_state) and not bool(repse.iva_complement)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="not repse.no_activity">
+                                        <td>
+                                            <span>ISR Statement</span>
+                                            <t t-if="repse.disr_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="disr"
+                                                    id="disr"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.disr_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.disr_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.disr_state) and bool(repse.isr_statement) or repse.disr_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.disr_state) and not bool(repse.isr_statement)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                        <td>
+                                            <span>ISR Complement</span>
+                                            <t t-if="repse.cisr_state != 'approve'">
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf, .xls, .xlsx"
+                                                    name="cisr"
+                                                    id="cisr"
+                                                    style="height:50px"
+                                                />
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-if="repse.cisr_state == 'approve'"
+                                                style="color:green"
+                                            >Validated</span>
+                                            <span t-if="repse.cisr_state == 'denied'" style="color:red">Rejected</span>
+                                            <span
+                                                t-if="not bool(repse.cisr_state) and bool(repse.isr_complement) or repse.cisr_state == 'pv'"
+                                            >In process</span>
+                                            <span
+                                                t-if="not bool(repse.cisr_state) and not bool(repse.isr_complement)"
+                                                style="color:#9a7d0a"
+                                            >Missing doc</span>
+                                        </td>
+                                    </tr>
+                                    <t t-if="repse.quatri">
+                                        <tr>
+                                            <td colspan="2">Four period docs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>ICSOE</span>
+                                                <t t-if="repse.icsoe_state != 'approve'">
+                                                    <input
+                                                        type="file"
+                                                        accept=".pdf, .xls, .xlsx"
+                                                        name="icsoe"
+                                                        id="icsoe"
+                                                        style="height:50px"
+                                                    />
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    t-if="repse.icsoe_state == 'approve'"
+                                                    style="color:green"
+                                                >Validated</span>
+                                                <span
+                                                    t-if="repse.icsoe_state == 'denied'"
+                                                    style="color:red"
+                                                >Rejected</span>
+                                                <span
+                                                    t-if="(not bool(repse.icsoe_state) and bool(repse.icsoe)) or repse.icsoe_state == 'pv'"
+                                                >In process</span>
+                                                <span
+                                                    t-if="not bool(repse.icsoe_state) and not bool(repse.icsoe)"
+                                                    style="color:#9a7d0a"
+                                                >Missing doc</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>SISUB</span>
+                                                <t t-if="repse.sisub_state != 'approve'">
+                                                    <input
+                                                        type="file"
+                                                        accept=".pdf, .xls, .xlsx"
+                                                        name="sisub"
+                                                        id="sisub"
+                                                        style="height:50px"
+                                                    />
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    t-if="repse.sisub_state == 'approve'"
+                                                    style="color:green"
+                                                >Validated</span>
+                                                <span
+                                                    t-if="repse.sisub_state == 'denied'"
+                                                    style="color:red"
+                                                >Rejected</span>
+                                                <span
+                                                    t-if="(not bool(repse.sisub_state) and bool(repse.sisub)) or repse.sisub_state == 'pv'"
+                                                >In process</span>
+                                                <span
+                                                    t-if="not bool(repse.sisub_state) and not bool(repse.sisub)"
+                                                    style="color:#9a7d0a"
+                                                >Missing doc</span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr t-if="repse.repse_line_ids">
+                                        <th colspan="4">Purchases</th>
+                                    </tr>
+                                    <tr t-if="repse.repse_line_ids">
+                                        <th width="25%">Folio</th>
+                                        <th width="25%">Date</th>
+                                        <th width="25%">Workers relationship</th>
+                                        <th width="25%">Status</th>
+                                    </tr>
+                                    <t t-foreach="repse.repse_line_ids" t-as="line">
+                                        <tr style="border: 1px solid black">
+                                            <td><span t-esc="line.purchase_order_id.name" /></td>
+                                            <td><span
+                                                    t-esc="line.purchase_date"
+                                                    t-options='{"widget": "date","format": "dd-MM-yyyy"}'
+                                                /></td>
+                                            <td>
+                                                <t t-if="line.worker_state != 'approve'">
+                                                    <input
+                                                        type="file"
+                                                        accept=".pdf, .xls, .xlsx"
+                                                        t-att-name="line.id"
+                                                        t-att-id="line.id"
+                                                        style="height:50px"
+                                                    />
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    t-if="line.worker_state == 'approve'"
+                                                    style="color:green"
+                                                >Validated</span>
+                                                <span
+                                                    t-if="line.worker_state == 'denied'"
+                                                    style="color:red"
+                                                >Rejected</span>
+                                                <span
+                                                    t-if="not bool(line.worker_state) and bool(line.workers_relationship) or line.worker_state == 'pv'"
+                                                >In process</span>
+                                                <span
+                                                    t-if="not bool(line.worker_state) and not bool(line.workers_relationship)"
+                                                    style="color:#9a7d0a"
+                                                >Missing doc</span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <t t-if="repse.state in ['process']">
+                                    <center>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary float-center mb32 "
+                                            style="font-weight: bold;font-size: 16px;background-color:#78D74F;color: white;"
+                                            onclick="process()"
+                                        >
+                                            Upload
+                                            <span class="fa fa-long-arrow-right" />
+                                        </button>
+                                    </center>
+                                </t>
+                            </form>
+                        </div>
+                        <br />
+                        <div class="o_portal_my_details">
+                            <form
+                                id="repse-docs-form"
+                                method="post"
+                                enctype="multipart/form-data"
+                                style="color:#015884; font-size:16px; font-weight:bold;"
+                            >
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                <input type="hidden" name="name" t-att-value="repse.name" />
+                                <input type="hidden" name="repse_type" t-att-value="repse.repse_type" />
+                                <table class="table">
+                                    <tr>
+                                        <td colspan="4">Uploaded documents</td>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.opinion">
+                                            <td>
+                                                <span>SAT compliance opinion</span>
+                                                <span
+                                                    id="opinion_name"
+                                                    t-esc="repse.opinion_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="opinion_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.opinion, 'doc_name': repse.opinion_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.imss_compliance">
+                                            <td>
+                                                <span>IMSS Compliance</span>
+                                                <span
+                                                    onclick="process1()"
+                                                    id="imss_name"
+                                                    t-esc="repse.imss_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="imss_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.imss_compliance, 'doc_name': repse.imss_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.infonavit_compliance">
+                                            <td>
+                                                <span>Infonavit Compliance</span>
+                                                <span
+                                                    id="infonavit_name"
+                                                    t-esc="repse.infonavit_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="infonavit_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.infonavit_compliance, 'doc_name': repse.infonavit_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.fiscal_constancy1">
+                                            <td>
+                                                <span>Monthly fiscal constancy</span>
+                                                <span
+                                                    onclick="process1()"
+                                                    id="fiscalc1_name"
+                                                    t-esc="repse.fiscalc1_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="fiscalc1_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.fiscal_constancy1, 'doc_name': repse.fiscalc1_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.no_activity_file">
+                                            <td>
+                                                <span>No activity written</span>
+                                                <span id="na_name" t-esc="repse.na_name" style="color: blue" />
+                                                <button
+                                                    name="na_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.no_activity_file, 'doc_name': repse.na_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.repse_doc">
+                                            <td>
+                                                <span>REPSE written</span>
+                                                <span id="repdoc_name" t-esc="repse.repdoc_name" style="color: blue" />
+                                                <button
+                                                    name="repdoc_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.repse_doc, 'doc_name': repse.repdoc_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.cfdi_paysheet">
+                                            <td>
+                                                <span>CFDI PAYSHEET</span>
+                                                <span id="cfdip_name" t-esc="repse.cfdip_name" style="color: blue" />
+                                                <button
+                                                    name="cfdi_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.cfdi_paysheet, 'doc_name': repse.cfdip_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.bim_card">
+                                            <td>
+                                                <span>BIM Card</span>
+                                                <span id="bim_name" t-esc="repse.bim_name" style="color: blue" />
+                                                <button
+                                                    name="bim_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.bim_card, 'doc_name': repse.bim_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.sipare_line">
+                                            <td>
+                                                <span>SIPARE Line</span>
+                                                <span
+                                                    onclick="process1()"
+                                                    id="sipare_name"
+                                                    t-esc="repse.sipare_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="sipare_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.sipare_line, 'doc_name': repse.sipare_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.settlement_resume">
+                                            <td>
+                                                <span>Settlement Resume</span>
+                                                <span
+                                                    id="settlement_name"
+                                                    t-esc="repse.settlement_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="settlement_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.settlement_resume, 'doc_name': repse.settlement_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.sua_payment">
+                                            <td>
+                                                <span>SUA Payment</span>
+                                                <span
+                                                    onclick="process1()"
+                                                    id="sua_name"
+                                                    t-esc="repse.sua_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="sua_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.sua_payment, 'doc_name': repse.sua_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.iva_statement">
+                                            <td>
+                                                <span>IVA Statement</span>
+                                                <span id="ivas_name" t-esc="repse.ivas_name" style="color: blue" />
+                                                <button
+                                                    name="ivas_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.iva_statement, 'doc_name': repse.ivas_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.iva_complement">
+                                            <td>
+                                                <span>IVA Complement</span>
+                                                <span
+                                                    onclick="process1()"
+                                                    id="ivac_name"
+                                                    t-esc="repse.ivac_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="ivac_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.iva_complement, 'doc_name': repse.ivac_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="repse.isr_statement">
+                                            <td>
+                                                <span>ISR Statement</span>
+                                                <span id="isrs_name" t-esc="repse.isrs_name" style="color: blue" />
+                                                <button
+                                                    name="isrs_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.isr_statement, 'doc_name': repse.isrs_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                        <t t-if="repse.isr_complement">
+                                            <td>
+                                                <span>ISR Complement</span>
+                                                <span
+                                                    onclick="process1()"
+                                                    id="isrc_name"
+                                                    t-esc="repse.isrc_name"
+                                                    style="color: blue"
+                                                />
+                                                <button
+                                                    name="isrc_check"
+                                                    onclick="process1()"
+                                                    t-att-value="{'doc': repse.isr_complement, 'doc_name': repse.isrc_name}"
+                                                    class="fa fa-download"
+                                                    icon="fa fa-download"
+                                                />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <t t-if="repse.quatri">
+                                        <tr>
+                                            <t t-if="repse.icsoe">
+                                                <td>
+                                                    <span>ICSOE</span>
+                                                    <span
+                                                        id="icsoe_name"
+                                                        t-esc="repse.icsoe_name"
+                                                        style="color: blue"
+                                                    />
+                                                    <button
+                                                        name="icsoe_check"
+                                                        onclick="process1()"
+                                                        t-att-value="{'doc': repse.icsoe, 'doc_name': repse.icsoe_name}"
+                                                        class="fa fa-download"
+                                                        icon="fa fa-download"
+                                                    />
+                                                </td>
+                                            </t>
+                                            <t t-if="repse.sisub">
+                                                <td>
+                                                    <span>SISUB</span>
+                                                    <span
+                                                        onclick="process1()"
+                                                        id="sisub_name"
+                                                        t-esc="repse.sisub_name"
+                                                        style="color: blue"
+                                                    />
+                                                    <button
+                                                        name="sisub_check"
+                                                        onclick="process1()"
+                                                        t-att-value="{'doc': repse.sisub, 'doc_name': repse.sisub_name}"
+                                                        class="fa fa-download"
+                                                        icon="fa fa-download"
+                                                    />
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td>Workers relationship</td>
+                                    </tr>
+                                    <t t-foreach="repse.repse_line_ids" t-as="line">
+                                        <t t-if="line.workers_relationship">
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="line.purchase_order_id.name" />
+                                                    <span
+                                                        onclick="process1()"
+                                                        id="workers_name"
+                                                        t-esc="line.workers_name"
+                                                        style="color: blue"
+                                                    />
+                                                    <button
+                                                        t-att-name="line.id"
+                                                        onclick="process1()"
+                                                        t-att-value="{'doc': line.workers_relationship, 'doc_name': line.workers_name}"
+                                                        class="fa fa-download"
+                                                        icon="fa fa-download"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </table>
+                            </form>
+                        </div>
+                        <br />
+                        <div id="repse_content" class="o_portal_content col-12 col-lg-9 col-xl-8">
+                            <div id="repse_communication" class="mt-4">
+                                <h3>Communication history</h3>
+                                <t t-call="portal.message_thread">
+                                    <t t-set="object" t-value="repse" />
+                                </t>
+                            </div>
+                        </div>
+                        <script type="text/javaScript">
+                            function process() {
+                                    document.getElementById("repse-form").submit();
+                                }
+                            function process1() {
+                                    document.getElementById("repse-docs-form").submit();
+                                }
+                        </script>
+                    </div>
+              </div>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

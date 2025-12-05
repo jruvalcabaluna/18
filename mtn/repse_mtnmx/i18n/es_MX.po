@@ -1,0 +1,1682 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* repse_mtnmx
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20211016\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-25 05:31+0000\n"
+"PO-Revision-Date: 2025-09-25 05:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid ""
+"  Greetings, we remind you that you have pending REPSE documentation,\n"
+"                        which must be submitted on the 8th and 20th of each month.\n"
+"                        We kindly ask that you send it as soon as possible. {} "
+msgstr ""
+"  Saludos, le recordamos que tiene documentación de REPSE pendiente, \n"
+"\t\t\t\t\t\tla cual se debe presentar el dia 8 y 20 de cada mes, \n"
+"\t\t\t\t\t\tle pedimos de la manera mas atenta enviarla lo mas pronto posible. {}"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "2 bussines days after payment ( Day 16 )"
+msgstr "2 dias habiles despues del pago ( Dia 16 )"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "2 bussines days after payment ( Day 16 to 20 )"
+msgstr "2 dias habiles despues del pago ( Dia 16 al 20 )"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "2 bussines days after payment ( Day 20 )"
+msgstr "2 dias habiles despues del pago ( Dia 20 )"
+
+#. module: repse_mtnmx
+#: model:mail.template,body_html:repse_mtnmx.email_template_repse_docs
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Good morning, we remind you that you have pending REPSE documentation, which you must submit no later than the 8th of this month.\n"
+"                    <t t-if=\"object.invoice_user_id.signature\">\n"
+"                        <br/>\n"
+"                        <t t-out=\"object.repse_user_id.signature or ''\">--<br/>Mitchell Admin</t>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Buen dia, le recordamos que tiene documentación de REPSE pendiente, la cual debera presentar a más tardar el día de hoy.\n"
+"                    <t t-if=\"object.invoice_user_id.signature\">\n"
+"                        <br/>\n"
+"                        <t t-out=\"object.repse_user_id.signature or ''\">--<br/>Mitchell Admin</t>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.invoice_repse_form_view
+msgid ""
+"<span attrs=\"{'invisible': [('repse_state','=','positive')]}\" "
+"groups=\"repse_mtnmx.group_repse_user,repse_mtnmx.group_repse_manager\">Repse"
+" state</span>"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "<span style=\"color:green\">Positive</span>"
+msgstr "<span style=\"color:green\">Positivo</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "<span style=\"color:red\">Process</span>"
+msgstr "<span style=\"color:red\">Proceso</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse_wizard_form_view
+msgid "<span> Create extemporaneous REPSE documents </span>"
+msgstr "Creación de documentos REPSE extemporaneos"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>BIM Card</span>"
+msgstr "<span>Cedula Mensual-Bimestral</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>CFDI PAYSHEET</span>"
+msgstr "<span>CFDI Nómina</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>ICSOE</span>"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>IMSS Compliance</span>"
+msgstr "<span>Cump. IMSS</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>ISR Complement</span>"
+msgstr "<span>Complemento de ISR</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>ISR Statement</span>"
+msgstr "<span>Declaración de ISR</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>IVA Complement</span>"
+msgstr "<span>Complemento de IVA</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>IVA Statement</span>"
+msgstr "<span>Declaración de IVA"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>Infonavit Compliance</span>"
+msgstr "<span>Cumplimiento Infonavit</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>Monthly fiscal constancy</span>"
+msgstr "<span>Constancia fiscal del mes</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>No activity written</span>"
+msgstr "<span>Escrito de No Actividad</span"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>REPSE Activity Doc</span>"
+msgstr "<span>E. Bajo protesta REPSE</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>REPSE written</span>"
+msgstr "Escrito REPSE"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>SAT compliance opinion</span>"
+msgstr "<span>Cump. SAT</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>SIPARE Line</span>"
+msgstr "<span>Linea SIPARE</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>SISUB</span>"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>SUA Payment</span>"
+msgstr "<span>Pago SUA</span>"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "<span>Settlement Resume</span>"
+msgstr "<span>Resumen de liquidación</span>"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__access_warning
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__access_warning
+msgid "Access warning"
+msgstr "Error de acceso"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__act_state
+msgid "Act State"
+msgstr "Estado de acta"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__acta_name
+msgid "Acta Name"
+msgstr "Nombre de acta"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_needaction
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_needaction
+msgid "Action Needed"
+msgstr "Accion requerida"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: repse_mtnmx
+#: model:mail.activity.team,name:repse_mtnmx.mail_activity_team_repse
+msgid "Activities for REPSE"
+msgstr "Actividades para REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__repse_type__activity
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Activity"
+msgstr "Actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_exception_decoration
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Excepción de actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_state
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_state
+msgid "Activity State"
+msgstr "Estado de actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_type_icon
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono de tipo de actividad"
+
+#. module: repse_mtnmx
+#: model:ir.actions.server,name:repse_mtnmx.action_purchase_repse
+msgid "Add purchase on repse document"
+msgstr "Agregar compra a documento REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__after_month
+msgid "After base month"
+msgstr "Despues del mes base"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "All"
+msgstr "Todos"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__all_partners
+msgid "All Partners"
+msgstr "Todos los contactos"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__all_periods
+msgid "All Periods"
+msgstr "Todos los Periodos"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__repse_attach
+msgid "Attach"
+msgstr "Anexo"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__repse_attach_state
+msgid "Attach State"
+msgstr "Estado anexo"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_attachment_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_attachment_count
+msgid "Attachment Count"
+msgstr "N° Adjuntos"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "BIM CARD, "
+msgstr "Cedula MENS-BIM"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__bim_card
+msgid "BIM-MON Card"
+msgstr "Cedula Mensual-Bimestral"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__bim_state
+msgid "BMC State"
+msgstr "Estado CMB"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__bim_name
+msgid "Bim Name"
+msgstr "Doc. MENS-BIM"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__cfiscal_state
+msgid "C.Fiscal State"
+msgstr "Estado C. Fiscal"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__cfdi_paysheet
+msgid "CFDI Paysheet"
+msgstr "CFDI Nómina"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "CFDI Paysheet, "
+msgstr "CFDI nomina, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__cfdi_state
+msgid "CFDI State"
+msgstr "Estado CFDI"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse_wizard_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__account_move__repse_state__cancel
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__state__cancel
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.partner_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__cfdip_name
+msgid "Cfdip Name"
+msgstr "Doc. CFDI-Nomina"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Communication history"
+msgstr "Historial de Comunicación"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "Compras relacionadas"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__compute_state
+msgid "Compute State"
+msgstr "Estado computado"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__act_cons
+msgid "Const. Act"
+msgstr "Act. Const."
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Constitutive act, "
+msgstr "Acta constitutiva, "
+
+#. module: repse_mtnmx
+#: model:ir.model,name:repse_mtnmx.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__contract
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__contract_v2
+msgid "Contract V2"
+msgstr "Contrato V2"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Create date"
+msgstr "Fecha de creación"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__create_uid
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__create_uid
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__create_uid
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__create_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__create_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__create_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "Currently does not exist REPSE docs to upload in your account."
+msgstr "Actualmente no existen documentos del REPSE para subir en su cuenta"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__access_url
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__access_url
+msgid "Customer Portal URL"
+msgstr "Portal de clientes"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+#, python-format
+msgid "Date"
+msgstr "Fecha"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__act_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__bim_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfdi_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfiscal1_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfiscal_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cisr_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__civa_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__disr_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__diva_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__icsoe_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__imss_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__infonavit_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__na_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__opinion_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__repse_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__settlement_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sipare_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sisub_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sua_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__worker_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse_line__repse_attach_state__denied
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse_line__worker_state__denied
+msgid "Denied"
+msgstr "Rechazado"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__display_name
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__display_name
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__display_name
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre Mostrado"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repse_doc
+msgid "Doc B.P. REPSE"
+msgstr "Escrito B.P. REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__move_id
+msgid "Facturas"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__failed_message_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__failed_message_ids
+msgid "Failed Messages"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__cfiscal1_state
+msgid "Fiscal C. 1 State"
+msgstr "Estado C. Fiscal 1"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__fiscal_constancy
+msgid "Fiscal Constancy"
+msgstr "Constancia Fiscal"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__fiscal_constancy1
+msgid "Fiscal Constancy 1"
+msgstr "Constancia Fiscal"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__fiscal_constancy_name
+msgid "Fiscal Constancy Name"
+msgstr "Doc. constancia fiscal"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Fiscal constancy, "
+msgstr "Constancia fiscal, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__fiscalc1_name
+msgid "Fiscalc1 Name"
+msgstr "Doc. constancia fiscal 1"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Folio"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_my_home_repse
+msgid "Follow up and doc upload for REPSE"
+msgstr "Seguimiento y carga de documentos REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_follower_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_partner_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__activity_type_icon
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Four month"
+msgstr "Cuatrimestre"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__repse_type__quatri
+msgid "Four month period"
+msgstr "Cuatrimestre"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "Four period doc"
+msgstr "Documentos de Cuatrimestre"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Four period docs"
+msgstr "Documentos de Cuatrimestre"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "From 1 to 8 of every month"
+msgstr "Del dia 1 al dia 8 de cada mes"
+
+#. module: repse_mtnmx
+#: model:ir.actions.server,name:repse_mtnmx.ir_cron_repse_email8_ir_actions_server
+#: model:ir.actions.server,name:repse_mtnmx.ir_cron_repse_email_ir_actions_server
+#: model:ir.cron,cron_name:repse_mtnmx.ir_cron_repse_email
+#: model:ir.cron,cron_name:repse_mtnmx.ir_cron_repse_email8
+#: model:ir.cron,name:repse_mtnmx.ir_cron_repse_email
+#: model:ir.cron,name:repse_mtnmx.ir_cron_repse_email8
+msgid ""
+"Generación de correo de notificación sobre documentación pendientes de subir"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.actions.server,name:repse_mtnmx.ir_cron_repse_email20_ir_actions_server
+#: model:ir.cron,cron_name:repse_mtnmx.ir_cron_repse_email20
+#: model:ir.cron,name:repse_mtnmx.ir_cron_repse_email20
+msgid ""
+"Generación de correo de notificación sobre documentación pendientes de subir"
+" (dia 20)"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.actions.server,name:repse_mtnmx.ir_cron_repse_ir_actions_server
+#: model:ir.cron,cron_name:repse_mtnmx.ir_cron_repse
+#: model:ir.cron,name:repse_mtnmx.ir_cron_repse
+msgid "Generación de registro para documentos cuatrimestrales"
+msgstr ""
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid "Greetings, you have repse docs to upload {}"
+msgstr "Saludos, tienes documentos repse por subir {}"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__has_message
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__has_message
+msgid "Has Message"
+msgstr "Tiene Mensaje"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__icsoe
+msgid "ICSOE"
+msgstr ""
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "ICSOE, "
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__imss_compliance
+msgid "IMSS Compliance"
+msgstr "Cump. IMSS"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__imss_state
+msgid "IMSS State"
+msgstr "Estado IMSS"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "IMSS compliance, "
+msgstr "Cumplimiento IMSS, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__infonavit_compliance
+msgid "INFONAVIT Compliance"
+msgstr "Cump. INFONAVIT"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__cisr_state
+msgid "ISR C. State"
+msgstr "Estado C. ISR"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__isr_complement
+msgid "ISR Comp."
+msgstr "Comp. ISR"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "ISR Complement, "
+msgstr "Complemento ISR, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__disr_state
+msgid "ISR S. State"
+msgstr "Estado D. ISR"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__isr_statement
+msgid "ISR Statement"
+msgstr "Declaración ISR"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "ISR Statement, "
+msgstr "Declaración ISR, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__civa_state
+msgid "IVA C. State"
+msgstr "Estado C. IVA"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__iva_complement
+msgid "IVA Comp."
+msgstr "Comp. IVA"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "IVA Complement, "
+msgstr "Complemento IVA, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__diva_state
+msgid "IVA S. State"
+msgstr "Estado D. IVA"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__iva_statement
+msgid "IVA Statement"
+msgstr "Declaración IVA"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "IVA Statement, "
+msgstr "Declaración IVA, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_exception_icon
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__activity_exception_icon
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__icsoe_name
+msgid "Icsoe Name"
+msgstr "Doc. ICSOE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__icsoe_state
+msgid "Icsoe State"
+msgstr "Estado ICSOE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_needaction
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_unread
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_needaction
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_has_error
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_has_sms_error
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_has_error
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__imss_name
+msgid "Imss Name"
+msgstr "Doc. IMSS"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__state__process
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "In Process"
+msgstr "En Proceso"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.invoice_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "In process"
+msgstr "En proceso"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__infonavit_name
+msgid "Infonavit Name"
+msgstr "Doc. Infonavit"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__infonavit_state
+msgid "Infonavit State"
+msgstr "Estado Infonavit"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Infonavit compliance, "
+msgstr "Cumplimiento Infonavit, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__invoice_count
+msgid "Invoice Count"
+msgstr "N° de facturas"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__invoice_ids
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_is_follower
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__isrc_name
+msgid "Isrc Name"
+msgstr "Doc. C. ISR"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__isrs_name
+msgid "Isrs Name"
+msgstr "Doc. D. ISR"
+
+#. module: repse_mtnmx
+#: model:ir.module.category,description:repse_mtnmx.module_document_repse
+msgid "It help us to give the necesary permisions for repse docuemnt manage."
+msgstr ""
+"Nos ayuda a dar los permisos necesarios para administración de los "
+"documentos REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__ivac_name
+msgid "Ivac Name"
+msgstr "Doc. C. IVA"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__ivas_name
+msgid "Ivas Name"
+msgstr "Doc. D. IVA"
+
+#. module: repse_mtnmx
+#: model:ir.model,name:repse_mtnmx.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse____last_update
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach____last_update
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line____last_update
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__write_uid
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__write_uid
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__write_uid
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__write_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__write_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__write_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_main_attachment_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:res.groups,name:repse_mtnmx.group_repse_manager
+msgid "Manager"
+msgstr "Administrador"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_has_error
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Missing"
+msgstr "Faltante"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Missing doc"
+msgstr "Documento Faltante"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__missing_documents
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "Missing docs"
+msgstr "Documentos Faltantes"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "Month"
+msgstr "Mes"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "Monthly Docs"
+msgstr "Documentos Mensuales"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Monthly fiscal contancy, "
+msgstr "Constancia fiscal mensual, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__my_activity_date_deadline
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "My repse docs"
+msgstr "Mi repse"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__na_name
+msgid "Na Name"
+msgstr "Doc. No Act."
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__name
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_attach__name
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__name
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "Name"
+msgstr "Nombre"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_calendar_event_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_date_deadline
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_summary
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_type_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "No"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__no_activity
+msgid "No Activity"
+msgstr "No actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__repse_type__no
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "No activity"
+msgstr "No actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__na_state
+msgid "No activity State"
+msgstr "Estado No actividad"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "No activity doc"
+msgstr "Documento No actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__no_activity_file
+msgid "No activity documentation"
+msgstr "Documentación No actividad"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_needaction_counter
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_has_error_counter
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_needaction_counter
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_has_error_counter
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__message_unread_counter
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:res.partner.category,name:repse_mtnmx.partner_portal_repse
+msgid "Only REPSE on portal"
+msgstr "Solo REPSE en portal"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "Open"
+msgstr "En proceso"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__opinion_name
+msgid "Opinion Name"
+msgstr "Doc. Opinon"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__opinion_state
+msgid "Opinion State"
+msgstr "Estado opinion"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Period"
+msgstr "Periodo"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__access_url
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__access_url
+msgid "Portal Access URL"
+msgstr "URL Portal de Acceso"
+
+#. module: repse_mtnmx
+#: model:res.groups,name:repse_mtnmx.group_repse_portal
+msgid "Portal REPSE"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__account_move__repse_state__positive
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__state__positive
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.partner_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Positive"
+msgstr "Positivo"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__account_move__repse_state__process
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.partner_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse_wizard_form_view
+msgid "Process"
+msgstr "Procesar"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__purchase_date
+msgid "Pruchase date"
+msgstr "Fecha de compra"
+
+#. module: repse_mtnmx
+#: model:ir.model,name:repse_mtnmx.model_purchase_order
+msgid "Purchase Order"
+msgstr "Orden de compra"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__purchase_order_id
+msgid "Purchase order"
+msgstr "Orden de compra"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/purchase_order.py:0
+#, python-format
+msgid "Purchase order {} added"
+msgstr "Orden de compra {} añadida"
+
+#. module: repse_mtnmx
+#: model:ir.model,name:repse_mtnmx.model_document_repse_line
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Purchases"
+msgstr "Compras"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__quatri
+msgid "Quatri"
+msgstr "Cuatrimestral"
+
+#. module: repse_mtnmx
+#: model:ir.actions.act_window,name:repse_mtnmx.action_document_repse
+#: model:ir.model,name:repse_mtnmx.model_document_repse
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_bank_statement_line__repse_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_move__repse_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_payment__repse_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_purchase_order__repse_line_id
+#: model:ir.module.category,name:repse_mtnmx.module_document_repse
+#: model:ir.ui.menu,name:repse_mtnmx.menu_document_repse
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_my_home_repse
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "REPSE"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.ui.menu,name:repse_mtnmx.menu_document_repse_docs
+msgid "REPSE Docs"
+msgstr "Docs REPSE"
+
+#. module: repse_mtnmx
+#: model_terms:ir.actions.act_window,help:repse_mtnmx.action_document_repse
+#: model_terms:ir.actions.act_window,help:repse_mtnmx.action_repse_wizard
+msgid "REPSE Docs Registration"
+msgstr "Registro de documentación REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repse_type
+msgid "REPSE Type"
+msgstr "Tipo de REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.actions.act_window,name:repse_mtnmx.action_repse_wizard
+#: model:ir.ui.menu,name:repse_mtnmx.menu_repase_wizard
+msgid "REPSE Wizard"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_purchase_order__repse_id
+msgid "REPSE doc"
+msgstr "Doc. REPSE"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repdoc_name
+msgid "Repdoc Name"
+msgstr "Doc. Escrito REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__repse_document_id
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.partner_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Repse"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__repse_attach_name
+msgid "Repse Attach Name"
+msgstr "Doc. Anexo"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_partner__repse_cancelled_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_users__repse_cancelled_count
+msgid "Repse Cancelled Count"
+msgstr "N° de REPSE cancelados"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_partner__repse_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_users__repse_count
+msgid "Repse Count"
+msgstr "N° de REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repse_date
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__date
+msgid "Repse Date"
+msgstr "Fecha Repse"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repse_state
+msgid "Repse Doc State"
+msgstr "Estado de doc. REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_partner__repse_group
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_users__repse_group
+msgid "Repse Group"
+msgstr "Grupo REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_bank_statement_line__repse_in_process_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_move__repse_in_process_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_payment__repse_in_process_count
+msgid "Repse In Process Count"
+msgstr "Repse en proceso"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repse_line_ids
+msgid "Repse Lines"
+msgstr "Lineas de REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_partner__repse_positive_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_users__repse_positive_count
+msgid "Repse Positive Count"
+msgstr "Repses positivos"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_partner__repse_process_count
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_users__repse_process_count
+msgid "Repse Process Count"
+msgstr "N° de repse en proceso"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.invoice_repse_form_view
+msgid "Repse Status"
+msgstr "Estado de REPSE"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Repse activity doc, "
+msgstr "Documento de actividad Repse, "
+
+#. module: repse_mtnmx
+#: model:ir.model,name:repse_mtnmx.model_document_repse_attach
+msgid "Repse attach"
+msgstr "Anexo repse"
+
+#. module: repse_mtnmx
+#: model:mail.activity.type,name:repse_mtnmx.mail_act_repse_review
+msgid "Repse docs review"
+msgstr "Revisión de doc. REPSE"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid "Repse docs uploaded"
+msgstr "Doc. REPSE añadidos"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid "Repse documents"
+msgstr "Documentos REPSE"
+
+#. module: repse_mtnmx
+#: model:mail.template,name:repse_mtnmx.email_template_repse_docs
+msgid "Repse notification by email"
+msgstr "Notificación de REPSE por email"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_bank_statement_line__repse_state
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_move__repse_state
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_payment__repse_state
+msgid "Repse state"
+msgstr "Estado REPSE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_purchase_order__repse_state
+msgid "Repse state (purchase)"
+msgstr "Estado REPSE (Compra)"
+
+#. module: repse_mtnmx
+#: model:ir.model,name:repse_mtnmx.model_repse_wizard
+msgid "Repse wizard for extemporaneous documents"
+msgstr "Wizard para documentos extemporaneos cuatrimestrales"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_bank_statement_line__repse_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_move__repse_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_account_payment__repse_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_partner__repse_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_res_users__repse_ids
+msgid "Repses"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_user_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario Responsable"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__opinion
+msgid "SAT compliance opinion"
+msgstr "Cump. SAT"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "SAT compliance opinion, "
+msgstr "Opinion de cumplimiento SAT, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sipare_line
+msgid "SIPARE Line"
+msgstr "Linea SIPARE"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "SIPARE, "
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sisub
+msgid "SISUB"
+msgstr ""
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "SISUB, "
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_has_sms_error
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sua_payment
+msgid "SUA Payment"
+msgstr "Pago SUA"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sua_state
+msgid "SUA State"
+msgstr "Estado SUA"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "SUA payment, "
+msgstr "Pago SUA, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__access_token
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__settlement_name
+msgid "Settlement Name"
+msgstr "Doc. Liquidación"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__settlement_resume
+msgid "Settlement Resume"
+msgstr "Resumen de liquidación"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__settlement_state
+msgid "Settlement State"
+msgstr "Estado de liquidación"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Settlement resume, "
+msgstr "Resumen de liquidación, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sipare_name
+msgid "Sipare Name"
+msgstr "Doc. Sipare"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sipare_state
+msgid "Sipare State"
+msgstr "Estado SIPARE"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sisub_name
+msgid "Sisub Name"
+msgstr "Doc. Sisub"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sisub_state
+msgid "Sisub State"
+msgstr "Estado SISUB"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "State"
+msgstr "Estado"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__state
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+#, python-format
+msgid "Status"
+msgstr "Estatus"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__activity_state
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__sua_name
+msgid "Sua Name"
+msgstr "Doc. Sua"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__partner_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__purchase_partner_id
+#: model:ir.model.fields,field_description:repse_mtnmx.field_repse_wizard__partner_id
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "The following document(s) has been uploaded, please follow up:"
+msgstr ""
+"Los siguientes documentos han sido cargados, favor de darles seguimiento:"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/account_move.py:0
+#, python-format
+msgid "This partner have incomplete repse documentationn: %s"
+msgstr "Este contacto tiene documentación repse incompleta: %s"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__act_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__bim_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfdi_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfiscal1_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfiscal_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cisr_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__civa_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__disr_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__diva_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__icsoe_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__imss_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__infonavit_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__na_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__opinion_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__repse_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__settlement_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sipare_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sisub_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sua_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__worker_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse_line__repse_attach_state__pv
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse_line__worker_state__pv
+msgid "To Validate"
+msgstr "Por Validar"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__activity_exception_decoration
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_unread
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__message_unread_counter
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid ""
+"Upload\n"
+"                                            <span class=\"fa fa-long-arrow-right\"/>"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Uploaded documents"
+msgstr "Documentos añadidos"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__repse_user_id
+msgid "User"
+msgstr "Usuario"
+
+#. module: repse_mtnmx
+#: model:res.groups,comment:repse_mtnmx.group_repse_manager
+msgid "Users allowed to manage and configure repse."
+msgstr "Usuarios permitidos para administrar y configurar REPSE"
+
+#. module: repse_mtnmx
+#: model:res.groups,comment:repse_mtnmx.group_repse_user
+msgid "Users allowed to read and create repse documents from purchase orders."
+msgstr "Usuarios permitidos para administrar y configurar compras"
+
+#. module: repse_mtnmx
+#: model:res.groups,comment:repse_mtnmx.group_repse_portal
+msgid "Users allowed to upload files for repse on portal."
+msgstr "Usuario permitidos para subir documentos en el portal de REPSE"
+
+#. module: repse_mtnmx
+#: model:res.groups,name:repse_mtnmx.group_repse_user
+msgid "Usuario"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__act_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__bim_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfdi_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfiscal1_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cfiscal_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__cisr_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__civa_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__disr_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__diva_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__icsoe_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__imss_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__infonavit_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__na_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__opinion_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__repse_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__settlement_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sipare_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sisub_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__sua_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse__worker_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse_line__repse_attach_state__approve
+#: model:ir.model.fields.selection,name:repse_mtnmx.selection__document_repse_line__worker_state__approve
+msgid "Valid"
+msgstr "Valido"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Validated"
+msgstr "Validado"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.view_repse_search
+msgid "Vendor"
+msgstr "Proveedor"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.document_repse_form_view
+msgid "Vendor Bills"
+msgstr "Facturas de proveedor"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/account_move.py:0
+#, python-format
+msgid "Warning"
+msgstr "Atención"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid "Warning to delete the {} document, has to be on a cancelled state"
+msgstr ""
+"Atención para eliminar el documento {}, este debe estar en estado cancelado"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid "Warning, you cannot set state to valid if theres no file to support it"
+msgstr ""
+"Atenciòn no puedes registrar un estado como validado sin documento que lo "
+"soporte"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__website_message_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse__website_message_ids
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_repse_wizard__all_partners
+msgid ""
+"With this option all partner that apply for repse and do not has their four period documents,\n"
+"         gonna be retrieve to create their missing document"
+msgstr ""
+"Con esta option todos los contactos que aplican para repse y no tienen su documentación cuatrimestral,\n"
+"         seran tomados en cuenta para crear su documentación faltante"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_repse_wizard__all_periods
+msgid ""
+"With this option all periods will be considered to create their corresponding documents in case\n"
+"        they have not been created previously."
+msgstr ""
+"Con esta opción todos los periodos seran considerador para crear los documentos correspondientes en cada caso\n"
+"        que no hayan sido creados previamente."
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Worker relationship from PO {}, "
+msgstr "Relación de trabajadores de la OC {}, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__workers_name
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__workers_name
+msgid "Workers Name"
+msgstr "Nombre lista trabajadores"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__worker_state
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__worker_state
+msgid "Workers State"
+msgstr "Estado Trabajadores"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__workers_relationship
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__workers_relationship
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.portal_repse_page
+msgid "Workers relationship"
+msgstr "Relaćión Trabajadores"
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "Workers relationship, "
+msgstr "Relación de trabajadores, "
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "Year"
+msgstr "Año"
+
+#. module: repse_mtnmx
+#: model_terms:ir.ui.view,arch_db:repse_mtnmx.repse
+msgid "Yes"
+msgstr "Si"
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,help:repse_mtnmx.field_document_repse_line__purchase_partner_id
+msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
+msgstr ""
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/controllers/main.py:0
+#, python-format
+msgid "no activity written, "
+msgstr "Escrito de no actividad, "
+
+#. module: repse_mtnmx
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse__activity_team_user_ids
+#: model:ir.model.fields,field_description:repse_mtnmx.field_document_repse_line__activity_team_user_ids
+msgid "test field"
+msgstr ""
+
+#. module: repse_mtnmx
+#: model:mail.template,subject:repse_mtnmx.email_template_repse_docs
+msgid "{{ object.company_id.name }} Repse (Ref {{ object.name or 'n/a' }})"
+msgstr ""
+
+#. module: repse_mtnmx
+#: code:addons/repse_mtnmx/models/document_repse.py:0
+#, python-format
+msgid "{} REPSE # {} "
+msgstr ""

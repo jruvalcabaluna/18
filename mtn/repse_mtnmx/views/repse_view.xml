@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="document_repse_form_view" model="ir.ui.view">
+        <field name="name">document.repse.form.view</field>
+        <field name="model">document.repse</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <button
+                        name="action_open"
+                        string="Open"
+                        class="btn-primary"
+                        type="object"
+                        invisible="state != 'cancel'"
+                        groups="repse_mtnmx.group_repse_manager"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancel"
+                        class="btn-primary"
+                        type="object"
+                        invisible="state != 'process'"
+                        groups="repse_mtnmx.group_repse_manager"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_view_invoice"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            invisible="invoice_count == 0"
+                        >
+                            <field name="invoice_count" widget="statinfo" string="Vendor Bills" />
+                            <field name='invoice_ids' invisible="1" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="1" />
+                            <field name="repse_type" invisible="1" />
+                            <field name="compute_state" invisible="1" />
+                            <field name="no_activity" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="repse_date" readonly="1" />
+                            <field name="create_date" />
+                            <field name="after_month" invisible="1" />
+                            <field name="quatri" invisible="1" />
+                        </group>
+                    </group>
+                    <group string="Monthly Docs" style="color: green">
+                        <group string="From 1 to 8 of every month">
+                            <field
+                                name="opinion"
+                                widget="binary"
+                                context="{'document': {'opinion_state': 'approve'}, 'attribute': opinion_name, 'field': 'opinion'}"
+                                filename="opinion_name"
+                            />
+                            <field name="opinion_name" invisible="1" />
+                            <field
+                                name="imss_compliance"
+                                context="{'document': {'imss_state': 'approve'}, 'attribute': imss_name, 'field': 'imss_compliance'}"
+                                filename="imss_name"
+                            />
+                            <field name="imss_name" invisible="1" />
+                            <field
+                                name="infonavit_compliance"
+                                context="{'document': {'infonavit_state': 'approve'}, 'attribute': infonavit_name, 'field': 'infonavit_compliance'}"
+                                filename="infonavit_name"
+                            />
+                            <field name="infonavit_name" invisible="1" />
+                            <field
+                                name="fiscal_constancy1"
+                                context="{'document': {'cfiscal1_state': 'approve'}, 'attribute': fiscalc1_name, 'field': 'fiscal_constancy1'}"
+                                filename="fiscalc1_name"
+                            />
+                            <field name="fiscalc1_name" invisible="1" />
+                            <field
+                                name="no_activity_file"
+                                string="No activity doc"
+                                context="{'document': {'na_state': 'approve'}, 'attribute': na_name, 'field': 'no_activity_file'}"
+                                filename="na_name"
+                                invisible="no_activity == False"
+                            />
+                            <field name="na_name" invisible="1" />
+                            <field
+                                name="repse_doc"
+                                context="{'document': {'repse_state': 'approve'}, 'attribute': repdoc_name, 'field': 'repse_doc'}"
+                                filename="repdoc_name"
+                                invisible="no_activity == True"
+                            />
+                            <field name="repdoc_name" invisible="1" />
+                        </group>
+                        <group string="Status">
+                            <field name="opinion_state" context="{'file': bool(opinion), 'state': opinion_state}" />
+                            <field name="imss_state" context="{'file': bool(imss_compliance), 'state': imss_state}" />
+                            <field
+                                name="infonavit_state"
+                                context="{'file': bool(infonavit_compliance), 'state': infonavit_state}"
+                            />
+                            <field
+                                name="cfiscal1_state"
+                                context="{'file': bool(fiscal_constancy1), 'state': cfiscal1_state}"
+                            />
+                            <field
+                                name="na_state"
+                                invisible="no_activity == False"
+                                context="{'file': bool(no_activity_file), 'state': na_state}"
+                            />
+                            <field
+                                name="repse_state"
+                                invisible="no_activity == True"
+                                context="{'file': bool(repse_doc), 'state': repse_state}"
+                            />
+                        </group>
+                        <!-- documents related to invoices from past month -->
+                        <group
+                            string="2 bussines days after payment ( Day 16 to 20 )"
+                            invisible="invoice_count == 0"
+                        >
+                            <field
+                                name="bim_card"
+                                context="{'document': {'bim_state': 'approve'}, 'attribute': bim_name, 'field': 'bim_card'}"
+                                filename="bim_name"
+                            />
+                            <field name="bim_name" invisible="1" />
+                            <field
+                                name="sipare_line"
+                                context="{'document': {'sipare_state': 'approve'}, 'attribute': sipare_name, 'field': 'sipare_line'}"
+                                filename="sipare_name"
+                            />
+                            <field name="sipare_name" invisible="1" />
+                            <field
+                                name="settlement_resume"
+                                context="{'document': {'settlement_state': 'approve'}, 'attribute': settlement_name, 'field': 'settlement_resume'}"
+                                filename="settlement_name"
+                            />
+                            <field name="settlement_name" invisible="1" />
+                            <field
+                                name="sua_payment"
+                                context="{'document': {'sua_state': 'approve'}, 'attribute': sua_name, 'field': 'sua_payment'}"
+                                filename="sua_name"
+                            />
+                            <field name="sua_name" invisible="1" />
+                            <field
+                                name="cfdi_paysheet"
+                                context="{'document': {'cfdi_state': 'approve'}, 'attribute': cfdip_name, 'field': 'cfdi_paysheet'}"
+                                filename="cfdip_name"
+                            />
+                            <field name="cfdip_name" invisible="1" />
+                            <field
+                                name="iva_statement"
+                                context="{'document': {'diva_state': 'approve'}, 'attribute': ivas_name, 'field': 'iva_statement'}"
+                                filename="ivas_name"
+                            />
+                            <field name="ivas_name" invisible="1" />
+                            <field
+                                name="iva_complement"
+                                context="{'document': {'civa_state': 'approve'}, 'attribute': ivac_name, 'field': 'iva_complement'}"
+                                filename="ivac_name"
+                            />
+                            <field name="ivac_name" invisible="1" />
+                            <field
+                                name="isr_statement"
+                                context="{'document': {'disr_state': 'approve'}, 'attribute': isrs_name, 'field': 'isr_statement'}"
+                                filename="isrs_name"
+                            />
+                            <field name="isrs_name" invisible="1" />
+                            <field
+                                name="isr_complement"
+                                context="{'document': {'cisr_state': 'approve'}, 'attribute': isrc_name, 'field': 'isr_complement'}"
+                                filename="isrc_name"
+                            />
+                            <field name="isrc_name" invisible="1" />
+                        </group>
+                        <group string="Status" invisible="invoice_count == 0">
+                            <field name="bim_state" context="{'file': bool(bim_card), 'state': bim_state}" />
+                            <field name="sipare_state" context="{'file': bool(sipare_line), 'state': sipare_state}" />
+                            <field
+                                name="settlement_state"
+                                context="{'file': bool(settlement_resume), 'state': settlement_state}"
+                            />
+                            <field name="sua_state" context="{'file': bool(sua_payment), 'state': sua_state}" />
+                            <field name="cfdi_state" context="{'file': bool(cfdi_paysheet), 'state': cfdi_state}" />
+                            <field name="diva_state" context="{'file': bool(iva_statement), 'state': diva_state}" />
+                            <field name="civa_state" context="{'file': bool(iva_complement), 'state': civa_state}" />
+                            <field name="disr_state" context="{'file': bool(isr_statement), 'state': disr_state}" />
+                            <field name="cisr_state" context="{'file': bool(isr_complement), 'state': cisr_state}" />
+                        </group>
+                    </group>
+                    <!-- Documents related with four month period [1,5,9] -->
+                    <group style="color: blue" invisible="quatri == False">
+                        <group string="Four period doc">
+                            <field
+                                name="icsoe"
+                                context="{'document': {'icsoe_state': 'approve'}, 'attribute': icsoe_name, 'field': 'icsoe'}"
+                                filename="icsoe_name"
+                            />
+                            <field name="icsoe_name" invisible="1" />
+                            <field
+                                name="sisub"
+                                context="{'document': {'sisub_state': 'approve'}, 'attribute': sisub_name, 'field': 'sisub'}"
+                                filename="sisub_name"
+                            />
+                            <field name="sisub_name" invisible="1" />
+                        </group>
+                        <group string="Status">
+                            <field name="icsoe_state" context="{'file': bool(icsoe), 'state': icsoe_state}" />
+                            <field name="sisub_state" context="{'file': bool(sisub), 'state': sisub_state}" />
+                        </group>
+                    </group>
+                    <field name="missing_documents" invisible="1" />
+                    <notebook>
+                        <page name="purchases" string="Compras relacionadas">
+                            <field name="repse_line_ids">
+                                <tree editable="bottom">
+                                    <field
+                                        name="purchase_order_id"
+                                        domain="[('partner_id' ,'=', parent.partner_id),('state','in',['purchase','done'])]"
+                                        required="1"
+                                    />
+                                    <field name="purchase_date" />
+                                    <field
+                                        name="workers_relationship"
+                                        context="{'document': {'worker_state': 'approve'}, 'attribute': workers_name, 'field': 'workers_relationship'}"
+                                        filename="workers_name"
+                                        widget="binary"
+                                    />
+                                    <field name="workers_name" invisible="1" />
+                                    <field
+                                        name="worker_state"
+                                        context="{'file': bool(workers_relationship), 'state': worker_state}"
+                                    />
+                                    <field
+                                        name="repse_attach"
+                                        context="{'document': {'repse_attach_state': 'approve'}, 'attribute': repse_attach_name}"
+                                        filename="repse_attach_name"
+                                        widget="binary"
+                                    />
+                                    <field name="repse_attach_name" invisible="1" />
+                                    <field name="repse_attach_state" />
+                                    <field name="name" invisible="1" />
+                                    <field name="repse_document_id" invisible="1" />
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field
+                                                    name="purchase_order_id"
+                                                    domain="[('partner_id' ,'=', parent.partner_id),('state','in',['purchase','done'])]"
+                                                />
+                                                <field
+                                                    name="workers_relationship"
+                                                    context="{'document': {'worker_state': 'approve'}, 'attribute': workers_name}"
+                                                    filename="workers_name"
+                                                />
+                                                <field name="workers_name" invisible="1" />
+                                            </group>
+                                            <group>
+                                                <field name="purchase_date" />
+                                                <field name="worker_state" />
+                                                <field name="name" invisible="1" />
+                                                <field
+                                                    name="repse_attach"
+                                                    context="{'document': {'repse_attach_state': 'approve'}, 'attribute': repse_attach_name}"
+                                                    filename="repse_attach_name"
+                                                />
+                                                <field name="repse_attach_name" invisible="1" />
+                                                <field name="name" invisible="1" />
+                                            </group>
+
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="document_repse_tree_view" model="ir.ui.view">
+        <field name="name">document.repse.tree.view</field>
+        <field name="model">document.repse</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="partner_id" optional="show" />
+                <field name="name" optional="show" />
+                <field name="create_date" optional="show" />
+                <field name="repse_date" optional="show" />
+                <field name="repse_type" optional="hide" />
+                <field name="missing_documents" optional="show" />
+                <field
+                    name="state"
+                    decoration-info="state == 'process'"
+                    decoration-success="state == 'positive'"
+                    decoration-danger="state == 'cancel'"
+                    optional="show"
+                />
+                <field name="opinion" optional="hide" />
+                <field name="opinion_state" optional="hide" />
+                <field name="imss_compliance" optional="hide" />
+                <field name="imss_state" optional="hide" />
+                <field name="infonavit_compliance" optional="hide" />
+                <field name="infonavit_state" optional="hide" />
+                <field name="fiscal_constancy1" optional="hide" />
+                <field name="cfiscal1_state" optional="hide" />
+                <field name="no_activity_file" invisible="no_activity == False" optional="hide" />
+                <field name="na_state" invisible="no_activity == False" optional="hide" />
+                <field name="repse_doc" invisible="no_activity == True" optional="hide" />
+                <field name="repse_state" invisible="no_activity == True" optional="hide" />
+                <field name="bim_card" invisible="invoice_count == 0" optional="hide" />
+                <field name="bim_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="sipare_line" invisible="invoice_count == 0" optional="hide" />
+                <field name="sipare_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="settlement_resume" invisible="invoice_count == 0" optional="hide" />
+                <field name="settlement_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="sua_payment" invisible="invoice_count == 0" optional="hide" />
+                <field name="sua_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="cfdi_paysheet" invisible="invoice_count == 0" optional="hide" />
+                <field name="cfdi_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="iva_statement" invisible="invoice_count == 0" optional="hide" />
+                <field name="diva_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="iva_complement" invisible="invoice_count == 0" optional="hide" />
+                <field name="civa_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="isr_statement" invisible="invoice_count == 0" optional="hide" />
+                <field name="disr_state" invisible="invoice_count == 0" optional="hide" />
+                <field name="isr_complement" invisible="invoice_count == 0" optional="hide" />
+                <field name="cisr_state" invisible="invoice_count == 0" optional="hide" />
+
+                <field name="icsoe" invisible="quatri == False" optional="hide" />
+                <field name="icsoe_state" invisible="quatri == False" optional="hide" />
+                <field name="sisub" invisible="quatri == False" optional="hide" />
+                <field name="sisub_state" invisible="quatri == False" optional="hide" />
+                <field name="repse_line_ids" widget="many2many_tags" optional="hide" />
+                <field name="no_activity" invisible="1" />
+                <field name="quatri" invisible="1" />
+                <field name="invoice_count" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_repse_search" model="ir.ui.view">
+        <field name="name">view.repse.search</field>
+        <field name="model">document.repse</field>
+        <field name="arch" type="xml">
+            <search string="Repse">
+                <field
+                    name="name"
+                    filter_domain="['|', ('name','ilike',self), ('name','=like',str(self)+'%')]"
+                    string="Repse"
+                />
+                <field name="partner_id" operator="child_of" />
+                <field name="repse_line_ids" />
+                <separator />
+                <filter name="date" string="Date" date="repse_date" />
+                <filter name="my_repse" string="My repse docs" domain="[('create_uid' ,'=', uid)]" />
+                <filter name="process" string="In Process" domain="[('state', '=', 'process')]" />
+                <filter name="positive" string="Positive" domain="[('state', '=', 'positive')]" />
+                <filter name="cancel" string="Cancelled" domain="[('state', '=', 'cancel')]" />
+                <filter name="activity" string="Activity" domain="[('no_activity' ,'=', False)]" />
+                <filter name="no_activity" string="No activity" domain="[('no_activity' ,'=', True)]" />
+                <filter name="quatri" string="Four month" domain="[('quatri' ,'=', True)]" />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter string="Vendor" name="vendor" domain="[]" context="{'group_by': 'partner_id'}" />
+                    <filter string="Date" name="repse_date" domain="[]" context="{'group_by': 'repse_date'}" />
+                    <filter
+                        string="Create date"
+                        name="create_date"
+                        domain="[]"
+                        context="{'group_by': 'create_date'}"
+                    />
+                    <filter string="Status" name="repse_state" domain="[]" context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_document_repse" model="ir.actions.act_window">
+        <field name="name">REPSE</field>
+        <field name="res_model">document.repse</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_repse_search" />
+        <field name="help">REPSE Docs Registration</field>
+        <field name="context">{'search_default_my_repse': True}</field>
+    </record>
+
+    <menuitem
+        id="menu_document_repse"
+        parent="contacts.menu_contacts"
+        name="REPSE"
+        sequence="2"
+        groups="repse_mtnmx.group_repse_manager"
+    />
+
+    <menuitem
+        id="menu_document_repse_docs"
+        parent="menu_document_repse"
+        name="REPSE Docs"
+        sequence="2"
+        action="action_document_repse"
+        groups="repse_mtnmx.group_repse_manager"
+    />
+
+
+</odoo>

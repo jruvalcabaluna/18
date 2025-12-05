@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="partner_repse_form_view" model="ir.ui.view">
+        <field name="name">partner.repse.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="action_view_repse" icon="fa-file-text-o" groups="repse_mtnmx.group_repse_manager,repse_mtnmx.group_repse_user" context="{'default_partner_id': active_id}" string="Repse" invisible="repse_count == 0">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Repse</span>
+                        <span class="o_stat_value">
+                            <!--<field string="Positive" name="repse_positive_count" decoration-success="repse_positive_count &gt;= 0" invisible="repse_positive_count == 0"/>
+                            <field string="Cancelled" name="repse_cancelled_count" decoration-danger="repse_cancelled_count &gt;= 0" invisible="repse_cancelled_count == 0"/>-->
+                            <field string="Process" name="repse_process_count" decoration-info="repse_process_count &gt;= 0" invisible="repse_process_count == 0"/>
+                        </span>
+                    </div>
+                </button>
+            </div>
+            <field name="category_id" position="after">
+                <field string="" name="repse_count" invisible="1" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
