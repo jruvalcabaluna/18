@@ -141,7 +141,8 @@ jobs:
       - name: Create Odoo database
         run: |
           #docker compose exec odoo odoo -d mtnmx_dev -i base --without-demo=all --load-language=en_US
-          docker exec -u odoo odoo odoo --addons-path=/mnt/extra-addons -d odoo_db --init all --stop-after-init
+          #docker exec -u odoo odoo odoo --addons-path=/mnt/extra-addons -d odoo_db --init all --stop-after-init
+          /odoo/odoo-bin -d mtnmx_dev
       #- name: Unzip Database
         #env:
         #  ODOO_MASTER_PASSWORD: "admin" # Store securely as a secret
