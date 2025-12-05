@@ -3,8 +3,7 @@
 on:
   push:
       branches:
-        - main
-        - "18"
+        - 17.0-dev
   workflow_dispatch:
 jobs:
   lint-and-build:
