@@ -94,8 +94,8 @@ jobs:
       - name: Listar directorios
         run: ls -l
 
-      #- name: Run pre-commit-vauxoo checks
-      #  run: pre-commit-vauxoo -p mtn # Or specify your desired pre-commit-vauxoo arguments
+      - name: Run pre-commit-vauxoo checks
+        run: pre-commit-vauxoo -p mtn # Or specify your desired pre-commit-vauxoo arguments
 
 #      - name: Version SO
 #        run: cat /etc/os-releasebuild-and-push
